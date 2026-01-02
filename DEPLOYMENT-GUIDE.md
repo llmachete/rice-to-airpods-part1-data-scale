@@ -3,29 +3,42 @@
 ## 🎉 What's Implemented
 
 ### ✅ Complete Features:
-1. **Scrollytelling Framework** - Scrollama.js integration with sticky visualizations
-2. **Visual 1: Rice Grain (3D)** - Three.js rotating rice grain with auto-animation
-3. **Visual 7: Resource Comparison** - Split-screen CSS/SVG comparison (Traditional vs Data)
-4. **Visual 5: Timeline Chart** - D3.js logarithmic chart (1981-2025 exponential growth)
-5. **Responsive Content** - Mobile-friendly scrolling with backdrop-blur text panels
-6. **Production Build** - Successfully compiled and optimized
+
+**Scrollytelling Visualizations (6/8 - 75%):**
+1. **Visual 1: Rice Grain (3D)** - Three.js rotating rice grain with auto-animation
+2. **Visual 2: Coffee Cup Fill** - Scroll-driven particle system (1 KB scale)
+3. **Visual 3: Shipping Container Zoom** - Dramatic cups-to-container transition (1 GB scale)
+4. **Visual 5: Timeline Chart** - D3.js exponential growth chart (1981-2025)
+5. **Visual 6: AirPods Cutaway** - 3D model with data stream particles
+6. **Visual 7: Resource Comparison** - Split-screen traditional vs data resources
+
+**Interactive Features (3/3 - 100%):**
+1. **Running Grains Counter** - Sticky real-time data creation counter
+2. **Sentence Counter** - Inline counter that updates while reading
+3. **Napster Time Machine** - Download speed simulator across eras
 
 ### 📊 Statistics:
-- **Project Size**: Next.js 14 + TypeScript + Tailwind
-- **Visualizations**: 3/8 implemented (37.5% complete)
+- **Project Size**: Next.js 16.1.1 + TypeScript + Tailwind
+- **Visualizations**: 6/8 implemented (75% complete)
+- **Interactive Features**: 3/3 implemented (100% complete)
 - **Build Status**: ✅ Passing
-- **Bundle**: Optimized for production
+- **Bundle**: Optimized for production with Turbopack
 
 ---
 
-## 🚀 Cloudflare Pages Deployment
+## 🚀 Cloudflare Pages Deployment to stories.llmachete.com
 
-**Reference**: See `/home/llmachete/projects/claude-code/LLMachete/content/data-hourglass/LLMACHETE_WEB_INFRASTRUCTURE_RESEARCH_2025.md` for complete infrastructure setup
+**Domain Architecture**:
+- Main domain: llmachete.com (owned at GoDaddy)
+- Content hub: **stories.llmachete.com** (this deployment)
+- Platform: Cloudflare Pages (free tier, unlimited bandwidth)
+- Strategy: Custom subdomain with CNAME to Cloudflare Pages
 
-**Current Setup**:
-- Domain: llmachete.com (owned at GoDaddy)
-- Target Platform: Cloudflare Pages (free tier, unlimited bandwidth)
-- Strategy: Keep domain at GoDaddy, point DNS to Cloudflare
+**Why stories.llmachete.com?**
+- Separates interactive content from marketing site
+- Scalable for future pieces (Part 2, Part 3, etc.)
+- Clear positioning as narrative/educational content
+- Easy to refactor into multi-route structure later
 
 ### Step 1: Initialize Git Repository
 
