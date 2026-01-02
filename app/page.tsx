@@ -20,9 +20,40 @@ const Visual5_Timeline = dynamic(
   { ssr: false, loading: () => <div className="text-slate-400">Loading visualization...</div> }
 );
 
+const Visual2_CoffeeCupFill = dynamic(
+  () => import('@/components/visualizations/Visual2_CoffeeCupFill'),
+  { ssr: false, loading: () => <div className="text-slate-400">Loading visualization...</div> }
+);
+
+const Visual6_AirPodsCutaway = dynamic(
+  () => import('@/components/visualizations/Visual6_AirPodsCutaway'),
+  { ssr: false, loading: () => <div className="text-slate-400">Loading visualization...</div> }
+);
+
+const Visual3_ContainerZoom = dynamic(
+  () => import('@/components/visualizations/Visual3_ContainerZoom'),
+  { ssr: false, loading: () => <div className="text-slate-400">Loading visualization...</div> }
+);
+
+const RunningCounter = dynamic(
+  () => import('@/components/interactive/RunningCounter'),
+  { ssr: false }
+);
+
+const NapsterTimeMachine = dynamic(
+  () => import('@/components/interactive/NapsterTimeMachine'),
+  { ssr: false }
+);
+
+const SentenceCounter = dynamic(
+  () => import('@/components/interactive/SentenceCounter'),
+  { ssr: false }
+);
+
 export default function Home() {
   const [currentStep, setCurrentStep] = useState(0);
   const [currentVisual, setCurrentVisual] = useState<string | null>(null);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   const handleStepEnter = (response: { index: number; element: HTMLElement }) => {
     setCurrentStep(response.index);
@@ -30,6 +61,10 @@ export default function Home() {
     if (visualId) {
       setCurrentVisual(visualId);
     }
+  };
+
+  const handleStepProgress = (response: { index: number; progress: number }) => {
+    setScrollProgress(response.progress);
   };
 
   return (
@@ -40,10 +75,13 @@ export default function Home() {
           From Rice to AirPods
         </h1>
         <p className="text-xl md:text-2xl text-slate-600 max-w-3xl mb-4">
-          Part 1: Data Scale
+          Part 1: The Scale of Data in 2025
         </p>
-        <p className="text-lg text-slate-500 max-w-2xl">
+        <p className="text-lg text-slate-500 max-w-2xl mb-4">
           Understanding the transformation from kilobytes to zettabytes through a single grain of rice
+        </p>
+        <p className="text-base text-slate-400 max-w-xl">
+          We've gone from coffee cups to oceans in 40 years. This is the journey humanity made—and why it changes everything.
         </p>
         <div className="mt-12 text-slate-400 animate-bounce">
           ↓ Scroll to explore ↓
@@ -60,6 +98,16 @@ export default function Home() {
                 <Visual1_RiceGrain />
               </div>
             )}
+            {currentVisual === 'visual-2' && (
+              <div className="w-full h-full relative">
+                <Visual2_CoffeeCupFill progress={scrollProgress} />
+              </div>
+            )}
+            {currentVisual === 'visual-3' && (
+              <div className="w-full h-full relative">
+                <Visual3_ContainerZoom progress={scrollProgress} />
+              </div>
+            )}
             {currentVisual === 'visual-7' && (
               <div className="w-full h-full relative">
                 <Visual7_ResourceComparison />
@@ -68,6 +116,11 @@ export default function Home() {
             {currentVisual === 'visual-5' && (
               <div className="w-full h-full relative">
                 <Visual5_Timeline />
+              </div>
+            )}
+            {currentVisual === 'visual-6' && (
+              <div className="w-full h-full relative">
+                <Visual6_AirPodsCutaway />
               </div>
             )}
             {!currentVisual && (
@@ -79,7 +132,11 @@ export default function Home() {
         </div>
 
         {/* Scrolling Content */}
-        <ScrollySection onStepEnter={handleStepEnter} offset={0.5}>
+        <ScrollySection
+          onStepEnter={handleStepEnter}
+          onStepProgress={handleStepProgress}
+          offset={0.5}
+        >
           {/* Section 1: Hold This in Your Hand */}
           <div className="relative">
             <div
@@ -91,16 +148,20 @@ export default function Home() {
                   Hold This in Your Hand
                 </h2>
                 <p className="text-lg text-slate-700 leading-relaxed mb-4">
-                  Hold out your hand. I'm going to give you a single grain of rice.
+                  Right now, wherever you are reading this, I want you to imagine holding a single grain
+                  of rice in your hand. Go ahead—picture it resting on your palm.
                 </p>
                 <p className="text-lg text-slate-700 leading-relaxed mb-4">
-                  This grain represents <strong>one byte of data</strong>—the atomic unit
-                  of our digital revolution. It's tiny. Insignificant on its own.
-                  Easy to hold, easy to count.
+                  It's tiny, nearly weightless, almost insignificant. You could lose it between the cracks
+                  of your desk or blow it away with a breath.
+                </p>
+                <p className="text-lg text-slate-700 leading-relaxed mb-4">
+                  That single grain represents <strong>one byte of data</strong>—the atomic unit
+                  of everything happening in the digital revolution transforming every industry right now.
                 </p>
                 <p className="text-lg text-slate-700 leading-relaxed">
-                  But what happens when that single grain becomes a cup?
-                  A container? An ocean?
+                  Now here's the question that changes everything: <strong>How many grains of rice do you
+                  think humanity creates in data every single day in 2025?</strong>
                 </p>
               </div>
             </div>
@@ -111,17 +172,86 @@ export default function Home() {
             >
               <div className="max-w-2xl mx-auto px-6 py-12 bg-white/80 backdrop-blur rounded-lg">
                 <h3 className="text-3xl font-bold text-slate-900 mb-6">
-                  Rice as First GPT
+                  Why Physical Analogies Matter
                 </h3>
                 <p className="text-lg text-slate-700 leading-relaxed mb-4">
-                  Ten thousand years ago, rice cultivation was humanity's first
-                  General Purpose Technology. It spread from China, enabled civilization,
-                  created population density, built cities.
+                  Data is abstract. You can't hold it, touch it, or see it pile up in a warehouse.
+                  When someone tells you "our system processes 50 terabytes per day," what does that
+                  actually <em>mean</em>?
+                </p>
+                <p className="text-lg text-slate-700 leading-relaxed mb-4">
+                  This abstraction creates a dangerous knowledge gap. Executives make million-dollar
+                  technology investments without truly understanding the scale of what they're managing.
                 </p>
                 <p className="text-lg text-slate-700 leading-relaxed">
-                  Ten thousand years later: ChatGPT. Same acronym. Same pattern
-                  of fundamental transformation. Coincidence? Perhaps. But the
-                  pattern is unmistakable.
+                  <strong>We need something you can picture, touch, and scale in your mind's eye.</strong>
+                  {' '}Enter the grain of rice.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Section 1.5: Coffee Cup Fill */}
+          <div className="relative">
+            <div
+              className="scroll-step min-h-screen flex items-center"
+              data-visual="visual-2"
+            >
+              <div className="max-w-2xl mx-auto px-6 py-12 bg-white/80 backdrop-blur rounded-lg">
+                <h2 className="text-4xl font-bold text-slate-900 mb-6">
+                  The Coffee Cup
+                </h2>
+                <p className="text-lg text-slate-700 leading-relaxed mb-4">
+                  Now imagine scooping up about 1,000 grains of rice into a standard coffee cup.
+                  That's a <strong>kilobyte (KB)</strong>.
+                </p>
+                <p className="text-lg text-slate-700 leading-relaxed mb-4">
+                  This was the scale of computing in the early 1980s. The Commodore 64,
+                  one of the most successful personal computers ever made, had 64 KB of RAM.
+                </p>
+                <p className="text-lg text-slate-700 leading-relaxed">
+                  Scroll to fill the cup and watch as we go from a single grain to
+                  1,000 grains—the building blocks of the personal computing revolution.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Interactive Feature: Sentence Counter */}
+          <div className="scroll-step min-h-screen flex items-center">
+            <div className="max-w-3xl mx-auto px-6">
+              <SentenceCounter />
+              <div className="mt-8 text-center text-slate-600 max-w-2xl mx-auto">
+                <p className="text-lg leading-relaxed">
+                  Did you feel that? That number climbing while you read? That's the velocity
+                  of the data revolution. And it never stops.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Section 1.75: Shipping Container Zoom */}
+          <div className="relative">
+            <div
+              className="scroll-step min-h-screen flex items-center"
+              data-visual="visual-3"
+            >
+              <div className="max-w-2xl mx-auto px-6 py-12 bg-white/80 backdrop-blur rounded-lg">
+                <h2 className="text-4xl font-bold text-slate-900 mb-6">
+                  The Shipping Container
+                </h2>
+                <p className="text-lg text-slate-700 leading-relaxed mb-4">
+                  Now we make a massive leap. Take <strong>one billion grains of rice</strong>—
+                  that's a <strong>gigabyte (GB)</strong>.
+                </p>
+                <p className="text-lg text-slate-700 leading-relaxed mb-4">
+                  Volume: Approximately 50 cubic meters—the size of a standard 20-foot
+                  shipping container.
+                </p>
+                <p className="text-lg text-slate-700 leading-relaxed">
+                  Scroll to watch as coffee cups multiply and transform into an industrial
+                  container. We moved from your kitchen counter to a shipping yard.
+                  <strong> And we made that leap in about 20 years.</strong>
                 </p>
               </div>
             </div>
@@ -161,16 +291,20 @@ export default function Home() {
                   The Scale Shift Nobody Prepared Us For
                 </h2>
                 <p className="text-lg text-slate-700 leading-relaxed mb-4">
-                  In 1981, the IBM PC launched with 64 KB of RAM. Sixty-four thousand
-                  bytes. You could count the grains.
+                  In 1981, the IBM PC launched with 64 KB of RAM. Sixty-four thousand bytes.
+                  You could literally count the grains in 64 coffee cups.
                 </p>
                 <p className="text-lg text-slate-700 leading-relaxed mb-4">
-                  In 2025, humanity creates <strong>175 zettabytes</strong> of data
-                  annually. That's 175 followed by 21 zeros.
+                  In 2025, humanity creates <strong>175 zettabytes</strong> of data annually.
+                  That's 175 followed by 21 zeros. That's <strong>175 lakes worth of rice grains—each
+                  lake 2 kilometers long, 1 kilometer wide, 25 meters deep—every single year.</strong>
+                </p>
+                <p className="text-lg text-slate-700 leading-relaxed mb-4">
+                  The gap between those two numbers—from countable to incomprehensible—happened in just 44 years.
                 </p>
                 <p className="text-lg text-slate-700 leading-relaxed">
-                  The gap between those two numbers—from countable to incomprehensible—
-                  happened in just 44 years.
+                  <strong>This isn't linear growth. This isn't even exponential growth in the traditional sense.
+                  This is a scale discontinuity</strong>—a fundamental break in how we must think about data as a resource.
                 </p>
               </div>
             </div>
@@ -192,6 +326,51 @@ export default function Home() {
             </div>
           </div>
 
+          {/* Section 4: AirPods Cutaway */}
+          <div className="relative">
+            <div
+              className="scroll-step min-h-screen flex items-center"
+              data-visual="visual-6"
+            >
+              <div className="max-w-2xl mx-auto px-6 py-12 bg-slate-800/80 backdrop-blur rounded-lg border border-slate-700">
+                <h2 className="text-4xl font-bold text-white mb-6">
+                  Making It Personal: What's In Your Ears Right Now?
+                </h2>
+                <p className="text-lg text-slate-300 leading-relaxed mb-4">
+                  Consider Apple AirPods Pro—those tiny wireless earbuds that millions
+                  of professionals wear daily. Inside each bud is the H2 chip, processing
+                  <strong className="text-white"> gigabytes of data per hour</strong>.
+                </p>
+                <p className="text-lg text-slate-300 leading-relaxed mb-4">
+                  You have shipping containers worth of rice—gigabytes of data—being
+                  processed in real-time <em>in your ears</em>, wirelessly, by a device
+                  smaller than a walnut.
+                </p>
+                <p className="text-lg text-slate-300 leading-relaxed">
+                  Thirty years ago, processing one gigabyte required room-sized computers
+                  costing hundreds of thousands of dollars. Today, you're doing it while
+                  jogging.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Interactive Feature: Napster Time Machine */}
+          <div className="scroll-step min-h-screen flex items-center py-20">
+            <div className="w-full px-6">
+              <div className="max-w-4xl mx-auto mb-8">
+                <h2 className="text-4xl font-bold text-slate-900 mb-4 text-center">
+                  Feeling the Velocity
+                </h2>
+                <p className="text-lg text-slate-700 leading-relaxed text-center max-w-2xl mx-auto">
+                  Remember downloading music? Let's travel back in time and feel the difference.
+                  Experience how data velocity transformed from 1999 Napster to today's 5G networks.
+                </p>
+              </div>
+              <NapsterTimeMachine />
+            </div>
+          </div>
+
           {/* Closing Section */}
           <div className="scroll-step min-h-screen flex items-center">
             <div className="max-w-2xl mx-auto px-6 py-12 bg-white/80 backdrop-blur rounded-lg">
@@ -200,12 +379,30 @@ export default function Home() {
               </h2>
               <p className="text-lg text-slate-700 leading-relaxed mb-4">
                 That single grain of rice we started with? Your smartphone processes
-                the equivalent of shipping containers full of rice every hour.
+                the equivalent of shipping containers full of rice every hour. The AirPods
+                in your ears handle gigabytes of data per hour—wirelessly, in a device smaller than a walnut.
+              </p>
+              <p className="text-lg text-slate-700 leading-relaxed mb-4">
+                We went from coffee cups (kilobytes) to shipping containers (gigabytes) to ocean-scale
+                lakes (zettabytes) in just 40 years. From your kitchen counter to an industrial shipping
+                yard to the Pacific Ocean.
+              </p>
+              <p className="text-lg text-slate-700 leading-relaxed mb-4">
+                <strong>The technology that would have filled a building in 1990 now fits in your pocket,
+                your ears, your watch.</strong>
               </p>
               <p className="text-lg text-slate-700 leading-relaxed">
-                From one grain to an ocean. That's the journey we just took.
-                And it's the journey humanity has made in less than half a century.
+                This is the scale shift that defines our era. The companies winning aren't the ones with
+                the most data—they're the ones who understand what to do with oceans when everyone else
+                is still thinking in cups.
               </p>
+              <div className="mt-8 p-4 bg-blue-50 rounded-lg border-l-4 border-blue-500">
+                <p className="text-sm text-slate-700 italic">
+                  <strong>Coming next:</strong> Part 2 explores the three dimensions of data that matter
+                  more than size (Volume, Velocity, Variety), and Part 3 reveals how specification quality
+                  became the new competitive moat in the AI era.
+                </p>
+              </div>
             </div>
           </div>
         </ScrollySection>
@@ -219,6 +416,9 @@ export default function Home() {
           <p className="text-slate-500 mt-4">LLMachete © 2025</p>
         </div>
       </footer>
+
+      {/* Running Counter (sticky, always visible) */}
+      <RunningCounter />
     </main>
   );
 }
