@@ -55,11 +55,6 @@ const ScrollProgress = dynamic(
   { ssr: false }
 );
 
-const VerificationTable = dynamic(
-  () => import('@/components/shared/VerificationTable'),
-  { ssr: false }
-);
-
 const ReflectionZone = dynamic(
   () => import('@/components/shared/ReflectionZone'),
   { ssr: false }
@@ -491,13 +486,6 @@ export default function Home() {
             </div>
           </div>
         </ScrollySection>
-      </div>
-
-      {/* Verification Table */}
-      <div className="bg-slate-50 py-12">
-        <div className="max-w-6xl mx-auto">
-          <VerificationTable />
-        </div>
       </div>
 
       {/* Footer */}
