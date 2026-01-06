@@ -35,8 +35,8 @@ const Visual3_ContainerZoom = dynamic(
   { ssr: false, loading: () => <div className="text-slate-400">Loading visualization...</div> }
 );
 
-const RunningCounter = dynamic(
-  () => import('@/components/interactive/RunningCounter'),
+const HumorousCounter = dynamic(
+  () => import('@/components/interactive/HumorousCounter'),
   { ssr: false }
 );
 
@@ -47,6 +47,31 @@ const NapsterTimeMachine = dynamic(
 
 const SentenceCounter = dynamic(
   () => import('@/components/interactive/SentenceCounter'),
+  { ssr: false }
+);
+
+const ScrollProgress = dynamic(
+  () => import('@/components/shared/ScrollProgress'),
+  { ssr: false }
+);
+
+const VerificationTable = dynamic(
+  () => import('@/components/shared/VerificationTable'),
+  { ssr: false }
+);
+
+const ReflectionZone = dynamic(
+  () => import('@/components/shared/ReflectionZone'),
+  { ssr: false }
+);
+
+const LetThatSinkIn = dynamic(
+  () => import('@/components/shared/ReflectionZone').then(mod => ({ default: mod.LetThatSinkIn })),
+  { ssr: false }
+);
+
+const MajorBreak = dynamic(
+  () => import('@/components/shared/ReflectionZone').then(mod => ({ default: mod.MajorBreak })),
   { ssr: false }
 );
 
@@ -70,7 +95,7 @@ export default function Home() {
   return (
     <main className="relative bg-slate-50">
       {/* Header */}
-      <header className="min-h-screen flex flex-col justify-center items-center px-6 text-center bg-gradient-to-b from-slate-50 to-white">
+      <header className="min-h-screen flex flex-col justify-center items-center px-6 text-center bg-gradient-to-b from-slate-50 to-white" data-section="intro">
         <h1 className="text-5xl md:text-7xl font-bold text-slate-900 mb-6">
           From Rice to AirPods
         </h1>
@@ -142,6 +167,7 @@ export default function Home() {
             <div
               className="scroll-step min-h-screen flex items-center"
               data-visual="visual-1"
+              data-section="grain"
             >
               <div className="max-w-2xl mx-auto px-6 py-12 bg-white/80 backdrop-blur rounded-lg">
                 <h2 className="text-4xl font-bold text-slate-900 mb-6">
@@ -196,6 +222,7 @@ export default function Home() {
             <div
               className="scroll-step min-h-screen flex items-center"
               data-visual="visual-2"
+              data-section="cup"
             >
               <div className="max-w-2xl mx-auto px-6 py-12 bg-white/80 backdrop-blur rounded-lg">
                 <h2 className="text-4xl font-bold text-slate-900 mb-6">
@@ -230,11 +257,20 @@ export default function Home() {
             </div>
           </div>
 
+          {/* Reflection Zone: Let that sink in */}
+          <LetThatSinkIn>
+            From a coffee cup you could hold in your kitchen... to a shipping container requiring forklifts to move.
+            <br />
+            <br />
+            <strong>And we made that leap in about 20 years.</strong>
+          </LetThatSinkIn>
+
           {/* Section 1.75: Shipping Container Zoom */}
           <div className="relative">
             <div
               className="scroll-step min-h-screen flex items-center"
               data-visual="visual-3"
+              data-section="container"
             >
               <div className="max-w-2xl mx-auto px-6 py-12 bg-white/80 backdrop-blur rounded-lg">
                 <h2 className="text-4xl font-bold text-slate-900 mb-6">
@@ -257,11 +293,41 @@ export default function Home() {
             </div>
           </div>
 
+          {/* Major Break */}
+          <MajorBreak />
+
+          {/* Reflection Zone: Interactive Question */}
+          <ReflectionZone
+            title="Before You Continue"
+            content="You just watched a coffee cup transform into a shipping container. That's a 1,000,000× increase in volume."
+            question="How many shipping containers do you think fit in your smartphone's storage?"
+            options={[
+              {
+                label: "10-50 containers",
+                feedback: "Not quite. Your phone holds much more than that!"
+              },
+              {
+                label: "50-100 containers",
+                feedback: "Getting warmer, but think bigger!"
+              },
+              {
+                label: "100-500 containers",
+                feedback: "Close! The actual number is even higher."
+              },
+              {
+                label: "500+ containers (many gigabytes)",
+                isCorrect: true,
+                feedback: "Exactly! A 128 GB iPhone contains the equivalent of 128 shipping containers worth of rice grains. And we carry this in our pockets every day."
+              }
+            ]}
+          />
+
           {/* Section 2: Data as New Resource */}
           <div className="relative">
             <div
               className="scroll-step min-h-screen flex items-center"
               data-visual="visual-7"
+              data-section="hourglass"
             >
               <div className="max-w-2xl mx-auto px-6 py-12 bg-white/80 backdrop-blur rounded-lg">
                 <h2 className="text-4xl font-bold text-slate-900 mb-6">
@@ -280,11 +346,15 @@ export default function Home() {
             </div>
           </div>
 
+          {/* Major Break */}
+          <MajorBreak />
+
           {/* Section 3: Historical Timeline */}
           <div className="relative">
             <div
               className="scroll-step min-h-screen flex items-center"
               data-visual="visual-5"
+              data-section="ocean"
             >
               <div className="max-w-2xl mx-auto px-6 py-12 bg-white/80 backdrop-blur rounded-lg">
                 <h2 className="text-4xl font-bold text-slate-900 mb-6">
@@ -326,11 +396,23 @@ export default function Home() {
             </div>
           </div>
 
+          {/* Reflection Zone */}
+          <LetThatSinkIn>
+            The gap between 64 KB and 175 zettabytes—from countable to incomprehensible—happened in just 44 years.
+            <br />
+            <br />
+            <strong>This is a scale discontinuity</strong> that happens once every 50-100 years.
+          </LetThatSinkIn>
+
+          {/* Major Break */}
+          <MajorBreak />
+
           {/* Section 4: AirPods Cutaway */}
           <div className="relative">
             <div
               className="scroll-step min-h-screen flex items-center"
               data-visual="visual-6"
+              data-section="airpods"
             >
               <div className="max-w-2xl mx-auto px-6 py-12 bg-slate-800/80 backdrop-blur rounded-lg border border-slate-700">
                 <h2 className="text-4xl font-bold text-white mb-6">
@@ -355,6 +437,9 @@ export default function Home() {
             </div>
           </div>
 
+          {/* Major Break */}
+          <MajorBreak />
+
           {/* Interactive Feature: Napster Time Machine */}
           <div className="scroll-step min-h-screen flex items-center py-20">
             <div className="w-full px-6">
@@ -372,7 +457,7 @@ export default function Home() {
           </div>
 
           {/* Closing Section */}
-          <div className="scroll-step min-h-screen flex items-center">
+          <div className="scroll-step min-h-screen flex items-center" data-section="conclusion">
             <div className="max-w-2xl mx-auto px-6 py-12 bg-white/80 backdrop-blur rounded-lg">
               <h2 className="text-4xl font-bold text-slate-900 mb-6">
                 The Pacific Ocean in Your Pocket
@@ -408,6 +493,13 @@ export default function Home() {
         </ScrollySection>
       </div>
 
+      {/* Verification Table */}
+      <div className="bg-slate-50 py-12">
+        <div className="max-w-6xl mx-auto">
+          <VerificationTable />
+        </div>
+      </div>
+
       {/* Footer */}
       <footer className="min-h-[50vh] flex items-center justify-center bg-slate-900 text-white">
         <div className="text-center px-6">
@@ -417,8 +509,11 @@ export default function Home() {
         </div>
       </footer>
 
-      {/* Running Counter (sticky, always visible) */}
-      <RunningCounter />
+      {/* Humorous Counter (sticky, always visible) */}
+      <HumorousCounter />
+
+      {/* Scroll Progress Indicators */}
+      <ScrollProgress />
     </main>
   );
 }

@@ -1,0 +1,74 @@
+{
+  "footnotes": [
+    {
+      "id": "idc-datasphere-2023",
+      "number": 1,
+      "content": "IDC's Global DataSphere forecast measured 120 zettabytes of data created globally in 2023, with a compound annual growth rate (CAGR) of 23% from 2018-2023.",
+      "source": "IDC Data Age 2025 Report",
+      "sourceUrl": "https://www.idc.com/getdoc.jsp?containerId=prUS47560321"
+    },
+    {
+      "id": "idc-datasphere-2025",
+      "number": 2,
+      "content": "Conservative estimate based on 120 ZB in 2023 growing at 23% annually yields 175-182 ZB for 2025. The 175 ZB figure assumes slight deceleration to ~21% growth in 2025.",
+      "source": "IDC Data Age 2025 Report (projection)",
+      "sourceUrl": "https://www.idc.com/getdoc.jsp?containerId=prUS47560321"
+    },
+    {
+      "id": "unstructured-data",
+      "number": 3,
+      "content": "IDC's 2023 survey found that approximately 80% of enterprise data is unstructured—including emails, documents, images, videos, and sensor logs—as opposed to structured database records.",
+      "source": "IDC Worldwide Unstructured Data Survey 2023",
+      "sourceUrl": "https://www.idc.com/getdoc.jsp?containerId=US49018922"
+    },
+    {
+      "id": "rice-grain-volume",
+      "number": 4,
+      "content": "Long-grain white rice averages 50 cubic millimeters (mm³) in volume, based on USDA Agricultural Research Service measurements of standard varieties.",
+      "source": "USDA Agricultural Research Service",
+      "sourceUrl": "https://www.ars.usda.gov/"
+    },
+    {
+      "id": "lake-superior-volume",
+      "number": 5,
+      "content": "Lake Superior contains approximately 12,100 cubic kilometers of water, making it the largest freshwater lake by surface area in the world and containing roughly 10% of the world's surface freshwater.",
+      "source": "NOAA Great Lakes Environmental Research Laboratory",
+      "sourceUrl": "https://www.glerl.noaa.gov/"
+    },
+    {
+      "id": "olympic-pool",
+      "number": 6,
+      "content": "FINA (World Aquatics) standards specify Olympic swimming pools as 50 meters long × 25 meters wide × minimum 2 meters deep, yielding 2,500 cubic meters of volume.",
+      "source": "FINA (World Aquatics) Standards",
+      "sourceUrl": "https://www.worldaquatics.com/"
+    },
+    {
+      "id": "commodore-64",
+      "number": 7,
+      "content": "The Commodore 64, released in 1982, featured 64 kilobytes of RAM and became one of the best-selling personal computers of all time, with estimated sales of 12-17 million units.",
+      "source": "Commodore Business Machines specifications",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Commodore_64"
+    },
+    {
+      "id": "airpods-throughput",
+      "number": 8,
+      "content": "Estimated based on Apple H2 chip specifications: AAC-LC audio (256 kbps Bluetooth), spatial audio processing (48 kHz sample rate), and active noise cancellation (200 Hz environmental sampling). Total processing estimated at ~1.16 GB per hour.",
+      "source": "Calculated from Apple AirPods Pro specifications",
+      "sourceUrl": "https://www.apple.com/airpods-pro/specs/"
+    },
+    {
+      "id": "data-center-energy",
+      "number": 9,
+      "content": "Statista projects global data center electricity consumption will reach approximately 1,050 terawatt-hours (TWh) annually by 2026, roughly equivalent to Japan's total electricity consumption.",
+      "source": "Statista Energy Report 2024",
+      "sourceUrl": "https://www.statista.com/statistics/1229367/data-center-energy-consumption-worldwide/"
+    },
+    {
+      "id": "shannon-information-theory",
+      "number": 10,
+      "content": "Claude Shannon's 1948 paper 'A Mathematical Theory of Communication' established the bit as the fundamental unit of information and laid the foundation for all digital communication.",
+      "source": "Shannon, C.E. (1948). Bell System Technical Journal",
+      "sourceUrl": "https://ieeexplore.ieee.org/document/6773024"
+    }
+  ]
+}
