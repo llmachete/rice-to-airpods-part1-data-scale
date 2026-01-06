@@ -50,6 +50,11 @@ const SentenceCounter = dynamic(
   { ssr: false }
 );
 
+const DataHourglass = dynamic(
+  () => import('@/components/interactive/DataHourglass'),
+  { ssr: false, loading: () => <div className="text-slate-400">Loading hourglass visualization...</div> }
+);
+
 const ScrollProgress = dynamic(
   () => import('@/components/shared/ScrollProgress'),
   { ssr: false }
@@ -338,6 +343,11 @@ export default function Home() {
                   infrastructure—data centers, fiber optics, satellites.
                 </p>
               </div>
+            </div>
+
+            {/* Data Hourglass Interactive Visualization */}
+            <div className="scroll-step">
+              <DataHourglass mode="explorer" />
             </div>
           </div>
 
