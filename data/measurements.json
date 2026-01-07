@@ -269,19 +269,6 @@
       "funFact": "Built around 2560 BC, still standing"
     },
     {
-      "id": "statue-of-liberty",
-      "name": "Statue of Liberty (interior)",
-      "category": "building",
-      "volumeM3": 2500,
-      "unit": "Statues of Liberty",
-      "emoji": "🗽",
-      "description": "Interior volume estimate",
-      "source": "National Park Service",
-      "sourceUrl": "https://www.nps.gov/stli/",
-      "weight": 8,
-      "animationType": "fill-vertical"
-    },
-    {
       "id": "astrodome",
       "name": "Houston Astrodome",
       "category": "building",
@@ -306,19 +293,6 @@
       "source": "Architectural Documentation",
       "sourceUrl": "https://www.defense.gov/",
       "weight": 8,
-      "animationType": "fill-vertical"
-    },
-    {
-      "id": "burj-khalifa",
-      "name": "Burj Khalifa",
-      "category": "building",
-      "volumeM3": 1900000,
-      "unit": "Burj Khalifas",
-      "emoji": "🌆",
-      "description": "World's tallest building (as of 2026)",
-      "source": "Emaar Properties",
-      "sourceUrl": "https://www.burjkhalifa.ae/",
-      "weight": 9,
       "animationType": "fill-vertical"
     },
     {
@@ -383,19 +357,6 @@
       "description": "Standard 53-foot dry van",
       "source": "DOT Transportation Standards",
       "sourceUrl": "https://www.transportation.gov/",
-      "weight": 7,
-      "animationType": "fill-horizontal"
-    },
-    {
-      "id": "school-bus",
-      "name": "School Bus (interior)",
-      "category": "vehicle",
-      "volumeM3": 30,
-      "unit": "School Buses",
-      "emoji": "🚌",
-      "description": "Standard Type C school bus interior",
-      "source": "School Bus Manufacturing Standards (estimate)",
-      "sourceUrl": "https://www.dimensions.com/",
       "weight": 7,
       "animationType": "fill-horizontal"
     },
@@ -687,19 +648,6 @@
       "animationType": "fill-vertical"
     },
     {
-      "id": "closet-walk-in",
-      "name": "Walk-in Closet",
-      "category": "area",
-      "volumeM3": 11.33,
-      "unit": "Walk-in Closets",
-      "emoji": "👔",
-      "description": "5x5x8 ft walk-in closet",
-      "source": "Residential Building Standards (estimate)",
-      "sourceUrl": "https://www.dimensions.com/",
-      "weight": 6,
-      "animationType": "fill-vertical"
-    },
-    {
       "id": "garage-2car",
       "name": "2-Car Garage",
       "category": "area",
@@ -750,29 +698,16 @@
       "sourceUrl": "https://www.census.gov/",
       "weight": 8,
       "animationType": "fill-vertical"
-    },
-    {
-      "id": "warehouse-100k",
-      "name": "Warehouse (100k sq ft)",
-      "category": "building",
-      "volumeM3": 279000,
-      "unit": "Warehouses",
-      "emoji": "🏭",
-      "description": "Standard distribution center (30 ft high)",
-      "source": "Industrial Real Estate Standards",
-      "sourceUrl": "https://www.dimensions.com/",
-      "weight": 7,
-      "animationType": "fill-vertical"
     }
   ],
   "metadata": {
-    "totalMeasurements": 70,
+    "totalMeasurements": 65,
     "categories": {
       "water": 7,
       "container": 18,
-      "building": 10,
-      "vehicle": 9,
-      "area": 9,
+      "building": 7,
+      "vehicle": 8,
+      "area": 8,
       "food": 10
     },
     "lastUpdated": "2026-01-04",
