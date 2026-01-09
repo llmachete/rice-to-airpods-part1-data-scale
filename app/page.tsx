@@ -4,9 +4,9 @@ import { useState } from 'react';
 import dynamic from 'next/dynamic';
 import ScrollySection from '@/components/ScrollySection';
 
-// Dynamic import for 3D components (client-side only)
+// Dynamic import for visualizations (client-side only)
 const Visual1_RiceGrain = dynamic(
-  () => import('@/components/visualizations/Visual1_RiceGrain'),
+  () => import('@/components/visualizations/Visual1_RiceGrain_2D'),
   { ssr: false, loading: () => <div className="text-slate-400">Loading visualization...</div> }
 );
 
@@ -26,7 +26,7 @@ const Visual2_CoffeeCupFill = dynamic(
 );
 
 const Visual6_AirPodsCutaway = dynamic(
-  () => import('@/components/visualizations/Visual6_AirPodsCutaway'),
+  () => import('@/components/visualizations/Visual6_AirPodsCutaway_2D'),
   { ssr: false, loading: () => <div className="text-slate-400">Loading visualization...</div> }
 );
 
@@ -51,7 +51,7 @@ const SentenceCounter = dynamic(
 );
 
 const DataHourglass = dynamic(
-  () => import('@/components/interactive/DataHourglass'),
+  () => import('@/components/interactive/DataHourglass_2D'),
   { ssr: false, loading: () => <div className="text-slate-400">Loading hourglass visualization...</div> }
 );
 
