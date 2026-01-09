@@ -30,6 +30,7 @@ export default function HumorousCounter() {
   const [showMath, setShowMath] = useState(false);
   const [showFormalMath, setShowFormalMath] = useState(false);
   const [fillPercentage, setFillPercentage] = useState(0);
+  const [isMinimized, setIsMinimized] = useState(true);
   const animationFrameRef = useRef<number | undefined>(undefined);
 
   // Weighted random selection
@@ -92,7 +93,7 @@ export default function HumorousCounter() {
   const riceVolumeM3 = currentBytes * RICE_GRAIN_VOLUME_M3;
   const ratio = riceVolumeM3 / currentMeasurement.volumeM3;
 
-  // Smart formatting: 2 decimals for readable numbers, scientific for very small
+  // Smart formatting: Always 2 decimals, show < 0.01 for very small numbers
   const formatRatio = (value: number): string => {
     if (value >= 0.01) {
       // Use 2 decimal places for normal numbers
@@ -100,9 +101,12 @@ export default function HumorousCounter() {
         minimumFractionDigits: 2,
         maximumFractionDigits: 2
       });
+    } else if (value > 0) {
+      // Show < 0.01 for very small non-zero numbers
+      return '< 0.01';
     } else {
-      // Scientific notation for very small numbers (< 0.01)
-      return value.toExponential(2);
+      // Show 0.00 for actual zero
+      return '0.00';
     }
   };
 
@@ -116,27 +120,55 @@ export default function HumorousCounter() {
     return `${(bytes / 1000000000).toFixed(1)} GB`;
   };
 
+  // Minimized view - compact horizontal bar
+  if (isMinimized) {
+    return (
+      <div
+        className="fixed top-4 right-4 md:top-6 md:right-6 z-50 cursor-pointer transition-all hover:scale-105"
+        onClick={() => setIsMinimized(false)}
+      >
+        <div className="bg-white border-2 border-slate-200 rounded-full shadow-lg px-4 py-2 md:px-5 md:py-3 flex items-center gap-2 md:gap-3 hover:shadow-xl transition-shadow">
+          <span className="text-lg md:text-xl">🌾</span>
+          <div className="flex items-baseline gap-1 md:gap-2">
+            <span className="text-base md:text-lg font-bold text-orange-600 font-mono">{displayValue}</span>
+            <span className="text-xs md:text-sm text-slate-600">{currentMeasurement.emoji} {currentMeasurement.unit}</span>
+          </div>
+          <span className="text-green-600 text-xs font-medium px-2 py-0.5 bg-green-50 rounded-full hidden md:inline">LIVE</span>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <>
       {/* Main Counter Widget */}
-      <div className="fixed top-24 right-6 w-80 bg-white border-2 border-slate-200 rounded-xl shadow-lg p-6 z-50 transition-all hover:shadow-xl">
+      <div className="fixed top-4 right-4 md:top-6 md:right-6 w-[calc(100vw-2rem)] md:w-80 max-w-sm bg-white border-2 border-slate-200 rounded-xl shadow-lg p-4 md:p-6 z-50 transition-all hover:shadow-xl">
         {/* Header */}
-        <div className="flex items-center justify-between mb-4">
-          <h3 className="text-sm font-semibold text-slate-700 uppercase tracking-wide">
-            🌾 Global Data Creation
-          </h3>
-          <span className="px-2 py-1 bg-green-100 text-green-700 text-xs font-medium rounded-full">
-            LIVE
-          </span>
+        <div className="flex items-center justify-between mb-3 md:mb-4">
+          <div className="flex items-center gap-2">
+            <h3 className="text-xs md:text-sm font-semibold text-slate-700 uppercase tracking-wide">
+              🌾 Global Data Creation
+            </h3>
+            <span className="px-2 py-1 bg-green-100 text-green-700 text-xs font-medium rounded-full">
+              LIVE
+            </span>
+          </div>
+          <button
+            onClick={() => setIsMinimized(true)}
+            className="text-slate-400 hover:text-slate-600 text-xl leading-none transition-colors"
+            aria-label="Minimize widget"
+          >
+            −
+          </button>
         </div>
 
         {/* Main Display */}
-        <div className="mb-4">
+        <div className="mb-3 md:mb-4">
           <div className="text-xs text-slate-500 mb-1">Since you arrived:</div>
-          <div className="text-3xl font-bold text-orange-600 mb-2 font-mono">
+          <div className="text-2xl md:text-3xl font-bold text-orange-600 mb-1 md:mb-2 font-mono">
             {displayValue}
           </div>
-          <div className="text-lg font-semibold text-slate-800 mb-1 flex items-center gap-2">
+          <div className="text-base md:text-lg font-semibold text-slate-800 mb-1 flex items-center gap-2">
             <span>{currentMeasurement.emoji}</span>
             <span>{currentMeasurement.unit}</span>
           </div>
@@ -146,12 +178,12 @@ export default function HumorousCounter() {
         </div>
 
         {/* Fill Indicator */}
-        <div className="mb-4">
+        <div className="mb-3 md:mb-4">
           <div className="flex items-center justify-between mb-1">
             <span className="text-xs text-slate-600 font-medium">Fill Level</span>
             <span className="text-xs text-orange-600 font-mono">{fillPercentage}%</span>
           </div>
-          <div className="h-8 bg-slate-100 rounded-lg overflow-hidden relative">
+          <div className="h-6 md:h-8 bg-slate-100 rounded-lg overflow-hidden relative">
             <div
               className="h-full bg-gradient-to-r from-teal-500 to-teal-600 transition-all duration-1000 ease-out relative"
               style={{ width: `${Math.min(fillPercentage, 100)}%` }}
@@ -159,7 +191,7 @@ export default function HumorousCounter() {
               <div className="absolute inset-0 bg-white/20 animate-pulse" />
             </div>
             <div className="absolute inset-0 flex items-center justify-center">
-              <span className="text-2xl opacity-30">
+              <span className="text-xl md:text-2xl opacity-30">
                 {currentMeasurement.emoji}
               </span>
             </div>
@@ -178,7 +210,7 @@ export default function HumorousCounter() {
 
         {/* Fun Fact */}
         {currentMeasurement.funFact && (
-          <div className="mb-3 p-2 bg-amber-50 border border-amber-200 rounded text-xs text-slate-700">
+          <div className="mb-2 md:mb-3 p-2 bg-amber-50 border border-amber-200 rounded text-xs text-slate-700">
             <span className="font-semibold">💡 </span>
             {currentMeasurement.funFact}
           </div>
@@ -187,7 +219,7 @@ export default function HumorousCounter() {
         {/* Show the Math Button */}
         <button
           onClick={() => setShowMath(!showMath)}
-          className="w-full py-2 px-4 bg-slate-100 hover:bg-slate-200 text-slate-700 text-sm font-medium rounded-lg transition-colors flex items-center justify-between"
+          className="w-full py-2 px-3 md:px-4 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs md:text-sm font-medium rounded-lg transition-colors flex items-center justify-between"
         >
           <span>Show the math</span>
           <span className={`transform transition-transform ${showMath ? 'rotate-180' : ''}`}>
@@ -197,7 +229,7 @@ export default function HumorousCounter() {
 
         {/* Conversational Math */}
         {showMath && (
-          <div className="mt-3 p-4 bg-slate-50 rounded-lg border border-slate-200 text-xs space-y-2">
+          <div className="mt-2 md:mt-3 p-3 md:p-4 bg-slate-50 rounded-lg border border-slate-200 text-xs space-y-2">
             <div className="font-semibold text-slate-800 mb-2">Quick Math:</div>
 
             <div className="space-y-1 text-slate-700">
@@ -227,7 +259,7 @@ export default function HumorousCounter() {
             {/* Show Formal Proof Button */}
             <button
               onClick={() => setShowFormalMath(true)}
-              className="w-full mt-2 py-2 px-3 bg-white hover:bg-slate-100 text-slate-700 text-xs font-medium rounded border border-slate-300 transition-colors"
+              className="w-full mt-2 py-1.5 md:py-2 px-3 bg-white hover:bg-slate-100 text-slate-700 text-xs font-medium rounded border border-slate-300 transition-colors"
             >
               Show formal calculation →
             </button>
@@ -238,16 +270,16 @@ export default function HumorousCounter() {
       {/* Formal Math Modal */}
       {showFormalMath && (
         <div
-          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[100] flex items-center justify-center p-4"
+          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[100] flex items-center justify-center p-2 md:p-4"
           onClick={() => setShowFormalMath(false)}
         >
           <div
-            className="bg-white rounded-xl shadow-2xl max-w-2xl w-full max-h-[80vh] overflow-y-auto"
+            className="bg-white rounded-xl shadow-2xl max-w-2xl w-full max-h-[90vh] md:max-h-[80vh] overflow-y-auto"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Modal Header */}
-            <div className="sticky top-0 bg-white border-b border-slate-200 px-6 py-4 flex items-center justify-between rounded-t-xl">
-              <h3 className="text-lg font-bold text-slate-900">Formal Calculation</h3>
+            <div className="sticky top-0 bg-white border-b border-slate-200 px-4 md:px-6 py-3 md:py-4 flex items-center justify-between rounded-t-xl">
+              <h3 className="text-base md:text-lg font-bold text-slate-900">Formal Calculation</h3>
               <button
                 onClick={() => setShowFormalMath(false)}
                 className="text-slate-400 hover:text-slate-600 text-2xl leading-none"
@@ -257,7 +289,7 @@ export default function HumorousCounter() {
             </div>
 
             {/* Modal Content */}
-            <div className="p-6 space-y-4">
+            <div className="p-4 md:p-6 space-y-3 md:space-y-4">
               {/* Given Values */}
               <div>
                 <div className="font-bold text-slate-900 mb-3">Given:</div>
@@ -335,10 +367,10 @@ export default function HumorousCounter() {
             </div>
 
             {/* Modal Footer */}
-            <div className="sticky bottom-0 bg-slate-50 border-t border-slate-200 px-6 py-4 flex justify-end rounded-b-xl">
+            <div className="sticky bottom-0 bg-slate-50 border-t border-slate-200 px-4 md:px-6 py-3 md:py-4 flex justify-end rounded-b-xl">
               <button
                 onClick={() => setShowFormalMath(false)}
-                className="px-4 py-2 bg-teal-600 hover:bg-teal-700 text-white font-medium rounded-lg transition-colors"
+                className="px-4 py-2 bg-teal-600 hover:bg-teal-700 text-white text-sm md:text-base font-medium rounded-lg transition-colors"
               >
                 Close
               </button>
