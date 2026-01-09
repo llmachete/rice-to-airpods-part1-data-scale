@@ -31,6 +31,7 @@ export default function HumorousCounter() {
   const [showFormalMath, setShowFormalMath] = useState(false);
   const [fillPercentage, setFillPercentage] = useState(0);
   const [isMinimized, setIsMinimized] = useState(true);
+  const [isVisible, setIsVisible] = useState(true);
   const animationFrameRef = useRef<number | undefined>(undefined);
 
   // Weighted random selection
@@ -88,6 +89,22 @@ export default function HumorousCounter() {
     return () => clearInterval(interval);
   }, []);
 
+  // Hide widget on scroll when minimized (prevents content overlap)
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      // Hide widget when scrolled past 400px, but only if minimized
+      if (scrollY > 400 && isMinimized) {
+        setIsVisible(false);
+      } else if (scrollY <= 400) {
+        setIsVisible(true);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [isMinimized]);
+
   if (!currentMeasurement) return null;
 
   const riceVolumeM3 = currentBytes * RICE_GRAIN_VOLUME_M3;
@@ -124,8 +141,13 @@ export default function HumorousCounter() {
   if (isMinimized) {
     return (
       <div
-        className="fixed top-4 right-4 md:top-6 md:right-6 z-50 cursor-pointer transition-all hover:scale-105"
-        onClick={() => setIsMinimized(false)}
+        className={`fixed top-4 right-4 md:top-6 md:right-6 z-50 cursor-pointer transition-all hover:scale-105 ${
+          !isVisible ? 'opacity-0 pointer-events-none' : 'opacity-100'
+        }`}
+        onClick={() => {
+          setIsMinimized(false);
+          setIsVisible(true); // Show widget when user explicitly expands it
+        }}
       >
         <div className="bg-white border-2 border-slate-200 rounded-full shadow-lg px-4 py-2 md:px-5 md:py-3 flex items-center gap-2 md:gap-3 hover:shadow-xl transition-shadow">
           <span className="text-lg md:text-xl">🌾</span>
@@ -142,7 +164,9 @@ export default function HumorousCounter() {
   return (
     <>
       {/* Main Counter Widget */}
-      <div className="fixed top-4 right-4 md:top-6 md:right-6 w-[calc(100vw-2rem)] md:w-80 max-w-sm bg-white border-2 border-slate-200 rounded-xl shadow-lg p-4 md:p-6 z-50 transition-all hover:shadow-xl">
+      <div className={`fixed top-4 right-4 md:top-6 md:right-6 w-[calc(100vw-2rem)] md:w-80 max-w-sm bg-white border-2 border-slate-200 rounded-xl shadow-lg p-4 md:p-6 z-50 transition-all hover:shadow-xl ${
+        !isVisible ? 'opacity-0 pointer-events-none' : 'opacity-100'
+      }`}>
         {/* Header */}
         <div className="flex items-center justify-between mb-3 md:mb-4">
           <div className="flex items-center gap-2">
