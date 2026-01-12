@@ -1,18 +1,13 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import { Analytics } from '@vercel/analytics/react';
 import Script from 'next/script';
 import "./globals.css";
 import CookieBanner from '@/components/shared/CookieBanner';
 
-// Brand-compliant fonts per LLMachete Brand Bible
-// Primary: Inter for UI/headings (web alternative to TeX Gyre Adventor)
-// Body: Georgia serif for long-form content (system font)
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-  display: 'swap',
-});
+// Brand-compliant fonts loaded via @font-face in globals.css
+// Heading: TeX Gyre Adventor Bold
+// Body Copy: TeX Gyre Adventor Regular
+// Secondary Text: Franklin Gothic Book
 
 export const metadata: Metadata = {
   title: "From Rice to AirPods: Data Scale | LLMachete",
@@ -47,9 +42,7 @@ export default function RootLayout({
           </>
         )}
       </head>
-      <body
-        className={`${inter.variable} antialiased`}
-      >
+      <body className="antialiased">
         {children}
 
         {/* Vercel Analytics */}

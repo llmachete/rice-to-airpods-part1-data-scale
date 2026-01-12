@@ -17,9 +17,10 @@ interface TopNavBarProps {
  * - Navy: #1A2332 (text/dark)
  * - Sand Beige: #F0E7E0 (light accent)
  *
- * Fonts:
- * - Inter (UI, headings) - web alternative to TeX Gyre Adventor
- * - Georgia (long-form prose)
+ * Fonts (Official Brand Guideline):
+ * - TeX Gyre Adventor Bold (headings)
+ * - TeX Gyre Adventor Regular (body copy)
+ * - Franklin Gothic Book (secondary text)
  */
 export default function TopNavBar({ scrollProgress = 0 }: TopNavBarProps) {
   const [currentScale, setCurrentScale] = useState<{
