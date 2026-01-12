@@ -33,7 +33,7 @@ export default function LandingPage() {
         {/* LLMachete Branding */}
         <div className="flex items-center justify-center space-x-3 mb-8">
           {/* Actual Logo */}
-          <div className="w-12 h-12 md:w-14 md:h-14 rounded-lg bg-[#D97D42] flex items-center justify-center shadow-lg">
+          <div className="w-12 h-12 md:w-14 md:h-14 rounded-lg bg-[#D47E45] flex items-center justify-center shadow-lg">
             <Image
               src="/llmachete-icon-only.svg"
               alt="LLMachete"
@@ -88,7 +88,7 @@ export default function LandingPage() {
               onClick={() => handleExperienceChoice('immersive')}
             >
               {/* Accent Bar */}
-              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#0E5A61] via-[#197A83] to-[#D97D42]" />
+              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#0E5A61] via-[#197A83] to-[#D47E45]" />
 
               <div className="p-8">
                 {/* Icon */}
@@ -111,19 +111,19 @@ export default function LandingPage() {
                 {/* Features */}
                 <ul className="space-y-2 mb-6">
                   <li className="flex items-start space-x-2 text-sm text-[#1A2332]/80">
-                    <span className="text-[#D97D42] mt-0.5 font-bold">✓</span>
+                    <span className="text-[#D47E45] mt-0.5 font-bold">✓</span>
                     <span>Full-screen visuals</span>
                   </li>
                   <li className="flex items-start space-x-2 text-sm text-[#1A2332]/80">
-                    <span className="text-[#D97D42] mt-0.5 font-bold">✓</span>
+                    <span className="text-[#D47E45] mt-0.5 font-bold">✓</span>
                     <span>Zero navigation chrome</span>
                   </li>
                   <li className="flex items-start space-x-2 text-sm text-[#1A2332]/80">
-                    <span className="text-[#D97D42] mt-0.5 font-bold">✓</span>
+                    <span className="text-[#D47E45] mt-0.5 font-bold">✓</span>
                     <span>Cinematic scroll experience</span>
                   </li>
                   <li className="flex items-start space-x-2 text-sm text-[#1A2332]/80">
-                    <span className="text-[#D97D42] mt-0.5 font-bold">✓</span>
+                    <span className="text-[#D47E45] mt-0.5 font-bold">✓</span>
                     <span>12-15 min reading time</span>
                   </li>
                 </ul>
@@ -152,8 +152,8 @@ export default function LandingPage() {
                 relative bg-white rounded-xl shadow-lg border-2
                 transition-all duration-300 cursor-pointer overflow-hidden
                 ${hoveredCard === 'article'
-                  ? 'border-[#D97D42] shadow-2xl scale-105'
-                  : 'border-[#F0E7E0] hover:border-[#D97D42]/50'
+                  ? 'border-[#D47E45] shadow-2xl scale-105'
+                  : 'border-[#F0E7E0] hover:border-[#D47E45]/50'
                 }
               `}
               onMouseEnter={() => setHoveredCard('article')}
@@ -161,12 +161,12 @@ export default function LandingPage() {
               onClick={() => handleExperienceChoice('article')}
             >
               {/* Accent Bar */}
-              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#D97D42] via-[#197A83] to-[#0E5A61]" />
+              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#D47E45] via-[#197A83] to-[#0E5A61]" />
 
               <div className="p-8">
                 {/* Icon */}
                 <div className="mb-6 flex justify-center">
-                  <div className="w-20 h-20 bg-gradient-to-br from-[#D97D42] to-[#197A83] rounded-2xl flex items-center justify-center shadow-lg">
+                  <div className="w-20 h-20 bg-gradient-to-br from-[#D47E45] to-[#197A83] rounded-2xl flex items-center justify-center shadow-lg">
                     <span className="text-4xl">📄</span>
                   </div>
                 </div>
@@ -184,26 +184,26 @@ export default function LandingPage() {
                 {/* Features */}
                 <ul className="space-y-2 mb-6">
                   <li className="flex items-start space-x-2 text-sm text-[#1A2332]/80">
-                    <span className="text-[#D97D42] mt-0.5 font-bold">✓</span>
+                    <span className="text-[#D47E45] mt-0.5 font-bold">✓</span>
                     <span>Top navigation with progress bar</span>
                   </li>
                   <li className="flex items-start space-x-2 text-sm text-[#1A2332]/80">
-                    <span className="text-[#D97D42] mt-0.5 font-bold">✓</span>
+                    <span className="text-[#D47E45] mt-0.5 font-bold">✓</span>
                     <span>Current scale indicator</span>
                   </li>
                   <li className="flex items-start space-x-2 text-sm text-[#1A2332]/80">
-                    <span className="text-[#D97D42] mt-0.5 font-bold">✓</span>
+                    <span className="text-[#D47E45] mt-0.5 font-bold">✓</span>
                     <span>All same visualizations</span>
                   </li>
                   <li className="flex items-start space-x-2 text-sm text-[#1A2332]/80">
-                    <span className="text-[#D97D42] mt-0.5 font-bold">✓</span>
+                    <span className="text-[#D47E45] mt-0.5 font-bold">✓</span>
                     <span>12-15 min reading time</span>
                   </li>
                 </ul>
 
                 {/* CTA Button */}
                 <button
-                  className="w-full py-3 px-6 bg-gradient-to-r from-[#D97D42] to-[#197A83] text-white font-semibold rounded-lg shadow-md hover:shadow-lg transition-all duration-200"
+                  className="w-full py-3 px-6 bg-gradient-to-r from-[#D47E45] to-[#197A83] text-white font-semibold rounded-lg shadow-md hover:shadow-lg transition-all duration-200"
                   onClick={(e) => {
                     e.stopPropagation();
                     handleExperienceChoice('article');

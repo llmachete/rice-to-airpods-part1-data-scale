@@ -2,14 +2,21 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #1A2332;
+
+  /* LLMachete Brand Colors - Official Brand Guideline */
+  --copper: #D47E45;        /* Warm Orange - Primary accent */
+  --deep-teal: #0E5A61;     /* Deep Teal Blue - Brand primary */
+  --medium-teal: #197A83;   /* Medium Teal - Supporting */
+  --navy: #1A2332;          /* Navy - Text/dark elements */
+  --sand-beige: #F0E7E0;    /* Soft Sand Beige - Light accents */
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-inter);
+  --font-serif: Georgia, 'Times New Roman', serif;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -22,7 +29,13 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  /* Brand-compliant fonts per LLMachete Brand Bible */
+  font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* Long-form content should use Georgia */
+article, .prose {
+  font-family: Georgia, 'Times New Roman', serif;
 }
 
 /* Custom animations for scrollytelling */

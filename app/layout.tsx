@@ -1,18 +1,17 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
 import { Analytics } from '@vercel/analytics/react';
 import Script from 'next/script';
 import "./globals.css";
 import CookieBanner from '@/components/shared/CookieBanner';
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+// Brand-compliant fonts per LLMachete Brand Bible
+// Primary: Inter for UI/headings (web alternative to TeX Gyre Adventor)
+// Body: Georgia serif for long-form content (system font)
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  display: 'swap',
 });
 
 export const metadata: Metadata = {
@@ -49,7 +48,7 @@ export default function RootLayout({
         )}
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${inter.variable} antialiased`}
       >
         {children}
 

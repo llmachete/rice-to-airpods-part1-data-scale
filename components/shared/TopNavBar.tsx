@@ -11,11 +11,15 @@ interface TopNavBarProps {
  * LLMachete Brand-Compliant Top Navigation Bar
  * Three sections: Brand | Current Scale | Reading Progress
  *
- * Brand Colors:
- * - Copper: #D97D42 (primary accent)
+ * Brand Colors (Official Brand Guideline):
+ * - Warm Orange (Copper): #D47E45 (primary accent)
  * - Deep Teal: #0E5A61 (brand primary)
  * - Navy: #1A2332 (text/dark)
  * - Sand Beige: #F0E7E0 (light accent)
+ *
+ * Fonts:
+ * - Inter (UI, headings) - web alternative to TeX Gyre Adventor
+ * - Georgia (long-form prose)
  */
 export default function TopNavBar({ scrollProgress = 0 }: TopNavBarProps) {
   const [currentScale, setCurrentScale] = useState<{
@@ -48,7 +52,7 @@ export default function TopNavBar({ scrollProgress = 0 }: TopNavBarProps) {
       setCurrentScale({
         name: 'Kilobyte',
         icon: '☕',
-        color: 'text-[#D97D42]' // Copper
+        color: 'text-[#D47E45]' // Warm Orange (Copper)
       });
     } else if (scrollProgress < 0.45) {
       setCurrentScale({
@@ -66,7 +70,7 @@ export default function TopNavBar({ scrollProgress = 0 }: TopNavBarProps) {
       setCurrentScale({
         name: 'In Your Pocket',
         icon: '📱',
-        color: 'text-[#D97D42]' // Copper
+        color: 'text-[#D47E45]' // Warm Orange (Copper)
       });
     }
   }, [scrollProgress, mounted]);
@@ -81,13 +85,14 @@ export default function TopNavBar({ scrollProgress = 0 }: TopNavBarProps) {
           <a href="/" className="flex items-center space-x-3 group">
             {/* Logo - Actual angular blade design */}
             <div className="relative w-10 h-10 md:w-12 md:h-12 flex-shrink-0">
-              <div className="w-full h-full rounded-lg bg-[#D97D42] flex items-center justify-center shadow-md group-hover:shadow-lg transition-shadow">
+              <div className="w-full h-full rounded-lg bg-[#D47E45] flex items-center justify-center shadow-md group-hover:shadow-lg transition-shadow">
                 <Image
                   src="/llmachete-icon-only.svg"
                   alt="LLMachete"
                   width={32}
                   height={32}
                   className="w-7 h-7 md:w-8 md:h-8"
+                  priority
                 />
               </div>
             </div>
@@ -143,8 +148,8 @@ export default function TopNavBar({ scrollProgress = 0 }: TopNavBarProps) {
                 className="absolute top-0 left-0 h-full rounded-full transition-all duration-300 ease-out"
                 style={{
                   width: `${scrollProgress * 100}%`,
-                  background: 'linear-gradient(90deg, #D97D42 0%, #197A83 50%, #0E5A61 100%)',
-                  boxShadow: scrollProgress > 0.05 ? '0 0 8px rgba(217, 125, 66, 0.4)' : 'none'
+                  background: 'linear-gradient(90deg, #D47E45 0%, #197A83 50%, #0E5A61 100%)',
+                  boxShadow: scrollProgress > 0.05 ? '0 0 8px rgba(212, 126, 69, 0.4)' : 'none'
                 }}
                 role="progressbar"
                 aria-valuenow={Math.round(scrollProgress * 100)}
