@@ -16,8 +16,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "From Rice to AirPods: The Data Scale Story | LLMachete",
-  description: "An interactive exploration of data scale from Industrial Revolution to Information Age. Visualize how global data creation has transformed through the lens of rice grains.",
+  title: "From Rice to AirPods: Data Scale | LLMachete",
+  description: "Understanding data scale from kilobytes to zettabytes through a single grain of rice. Explore humanity's transformation from Industrial Revolution to Information Age.",
 };
 
 export default function RootLayout({

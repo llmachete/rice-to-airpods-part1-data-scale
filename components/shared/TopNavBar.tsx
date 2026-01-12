@@ -4,18 +4,18 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 
 interface TopNavBarProps {
-  /**
-   * Current scroll progress (0-1)
-   */
   scrollProgress?: number;
 }
 
 /**
- * Three-section top navigation bar for Rice to AirPods article
+ * LLMachete Brand-Compliant Top Navigation Bar
+ * Three sections: Brand | Current Scale | Reading Progress
  *
- * Section 1 (Left): LLMachete Wordmark + Logo
- * Section 2 (Center): Data Scale Indicator (shows current scale context as you scroll)
- * Section 3 (Right): Reading Progress Bar (fills as you progress through article)
+ * Brand Colors:
+ * - Copper: #D97D42 (primary accent)
+ * - Deep Teal: #0E5A61 (brand primary)
+ * - Navy: #1A2332 (text/dark)
+ * - Sand Beige: #F0E7E0 (light accent)
  */
 export default function TopNavBar({ scrollProgress = 0 }: TopNavBarProps) {
   const [currentScale, setCurrentScale] = useState<{
@@ -25,7 +25,7 @@ export default function TopNavBar({ scrollProgress = 0 }: TopNavBarProps) {
   }>({
     name: 'Byte',
     icon: '○',
-    color: 'text-blue-500'
+    color: 'text-[#0E5A61]' // Deep teal
   });
 
   const [mounted, setMounted] = useState(false);
@@ -38,36 +38,35 @@ export default function TopNavBar({ scrollProgress = 0 }: TopNavBarProps) {
   useEffect(() => {
     if (!mounted) return;
 
-    // Determine which section user is currently viewing based on scroll progress
     if (scrollProgress < 0.15) {
       setCurrentScale({
         name: 'Byte',
         icon: '○',
-        color: 'text-blue-500'
+        color: 'text-[#0E5A61]'
       });
     } else if (scrollProgress < 0.25) {
       setCurrentScale({
         name: 'Kilobyte',
         icon: '☕',
-        color: 'text-amber-600'
+        color: 'text-[#D97D42]' // Copper
       });
     } else if (scrollProgress < 0.45) {
       setCurrentScale({
         name: 'Gigabyte',
         icon: '📦',
-        color: 'text-slate-700'
+        color: 'text-[#197A83]' // Medium teal
       });
     } else if (scrollProgress < 0.75) {
       setCurrentScale({
         name: 'Zettabyte',
         icon: '🌊',
-        color: 'text-blue-600'
+        color: 'text-[#0E5A61]' // Deep teal
       });
     } else {
       setCurrentScale({
         name: 'In Your Pocket',
         icon: '📱',
-        color: 'text-purple-600'
+        color: 'text-[#D97D42]' // Copper
       });
     }
   }, [scrollProgress, mounted]);
@@ -75,32 +74,38 @@ export default function TopNavBar({ scrollProgress = 0 }: TopNavBarProps) {
   if (!mounted) return null;
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-[#F0E7E0] shadow-sm">
       <div className="mx-auto h-16 flex items-stretch">
-        {/* Section 1: LLMachete Wordmark + Logo (Left) */}
-        <div className="flex items-center px-4 md:px-6 border-r border-slate-200 min-w-[200px] md:min-w-[240px]">
-          <div className="flex items-center space-x-2">
-            {/* Logo (machete icon) */}
-            <div className="flex items-center justify-center w-8 h-8 md:w-10 md:h-10 rounded-lg bg-gradient-to-br from-emerald-500 to-teal-600 shadow-md">
-              <span className="text-white text-xl md:text-2xl font-bold transform -rotate-45">
-                🔪
-              </span>
+        {/* Section 1: LLMachete Brand (Left) */}
+        <div className="flex items-center px-4 md:px-6 border-r border-[#F0E7E0] min-w-[220px] md:min-w-[280px]">
+          <a href="/" className="flex items-center space-x-3 group">
+            {/* Logo - Actual angular blade design */}
+            <div className="relative w-10 h-10 md:w-12 md:h-12 flex-shrink-0">
+              <div className="w-full h-full rounded-lg bg-[#D97D42] flex items-center justify-center shadow-md group-hover:shadow-lg transition-shadow">
+                <Image
+                  src="/llmachete-icon-only.svg"
+                  alt="LLMachete"
+                  width={32}
+                  height={32}
+                  className="w-7 h-7 md:w-8 md:h-8"
+                />
+              </div>
             </div>
 
-            {/* Wordmark */}
+            {/* Brand Text */}
             <div className="flex flex-col">
-              <span className="text-base md:text-lg font-bold text-slate-900 leading-none tracking-tight">
+              <span className="text-base md:text-lg font-bold text-[#1A2332] leading-tight tracking-tight">
                 LLMachete
               </span>
-              <span className="text-[10px] md:text-xs text-slate-500 leading-none">
-                Rice to AirPods
+              <span className="text-[10px] md:text-xs text-[#0E5A61] leading-none font-medium">
+                Data Scale
               </span>
             </div>
-          </div>
+          </a>
         </div>
 
-        {/* Section 2: Data Scale Indicator (Center) */}
-        <div className="flex-1 flex items-center justify-center px-4 border-r border-slate-200">
+        {/* Section 2: Current Scale Indicator (Center) */}
+        <div className="flex-1 flex items-center justify-center px-4 border-r border-[#F0E7E0]">
           <div className="flex items-center space-x-2 md:space-x-3">
             {/* Scale Icon */}
             <span className="text-xl md:text-2xl" role="img" aria-label={currentScale.name}>
@@ -109,8 +114,8 @@ export default function TopNavBar({ scrollProgress = 0 }: TopNavBarProps) {
 
             {/* Scale Name */}
             <div className="flex flex-col">
-              <span className="text-xs text-slate-500 leading-none mb-0.5 hidden md:block">
-                Current Scale:
+              <span className="text-[10px] text-[#1A2332]/60 leading-none mb-0.5 hidden md:block font-medium uppercase tracking-wide">
+                Current Scale
               </span>
               <span className={`text-sm md:text-base font-semibold ${currentScale.color} leading-none`}>
                 {currentScale.name}
@@ -119,26 +124,27 @@ export default function TopNavBar({ scrollProgress = 0 }: TopNavBarProps) {
           </div>
         </div>
 
-        {/* Section 3: Reading Progress Bar (Right) */}
-        <div className="flex items-center px-4 md:px-6 min-w-[140px] md:min-w-[180px]">
+        {/* Section 3: Reading Progress (Right) */}
+        <div className="flex items-center px-4 md:px-6 min-w-[140px] md:min-w-[200px]">
           <div className="flex-1">
             {/* Progress Label */}
-            <div className="flex items-center justify-between mb-1">
-              <span className="text-[10px] md:text-xs text-slate-500 font-medium">
+            <div className="flex items-center justify-between mb-1.5">
+              <span className="text-[10px] md:text-xs text-[#1A2332]/60 font-medium uppercase tracking-wide">
                 Progress
               </span>
-              <span className="text-[10px] md:text-xs text-slate-600 font-semibold">
+              <span className="text-xs md:text-sm text-[#1A2332] font-bold tabular-nums">
                 {Math.round(scrollProgress * 100)}%
               </span>
             </div>
 
-            {/* Progress Bar */}
-            <div className="relative h-2 bg-slate-200 rounded-full overflow-hidden">
+            {/* Progress Bar - Brand gradient */}
+            <div className="relative h-2 bg-[#F0E7E0] rounded-full overflow-hidden">
               <div
-                className="absolute top-0 left-0 h-full bg-gradient-to-r from-emerald-500 via-teal-500 to-blue-500 rounded-full transition-all duration-300 ease-out"
+                className="absolute top-0 left-0 h-full rounded-full transition-all duration-300 ease-out"
                 style={{
                   width: `${scrollProgress * 100}%`,
-                  boxShadow: scrollProgress > 0.05 ? '0 0 8px rgba(16, 185, 129, 0.4)' : 'none'
+                  background: 'linear-gradient(90deg, #D97D42 0%, #197A83 50%, #0E5A61 100%)',
+                  boxShadow: scrollProgress > 0.05 ? '0 0 8px rgba(217, 125, 66, 0.4)' : 'none'
                 }}
                 role="progressbar"
                 aria-valuenow={Math.round(scrollProgress * 100)}
