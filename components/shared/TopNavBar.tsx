@@ -99,16 +99,16 @@ export default function TopNavBar({ scrollProgress = 0 }: TopNavBarProps) {
             </div>
 
             {/* Brand Wordmark (Image) + Subtitle */}
-            <div className="flex flex-col">
+            <div className="flex flex-col items-start">
               <Image
                 src="/llmachete-wordmark.svg"
                 alt="LLMachete"
-                width={160}
-                height={32}
-                className="h-6 md:h-8 w-auto"
+                width={200}
+                height={40}
+                className="h-7 md:h-10 w-auto"
                 priority
               />
-              <span className="text-[10px] md:text-xs text-[#0E5A61] leading-none font-medium mt-0.5">
+              <span className="text-[10px] md:text-xs text-[#0E5A61] leading-none font-medium mt-0.5 text-left">
                 Data Scale
               </span>
             </div>
