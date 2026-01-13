@@ -103,9 +103,9 @@ export default function TopNavBar({ scrollProgress = 0 }: TopNavBarProps) {
               <Image
                 src="/llmachete-wordmark.svg"
                 alt="LLMachete"
-                width={120}
-                height={24}
-                className="h-5 md:h-6 w-auto"
+                width={160}
+                height={32}
+                className="h-6 md:h-8 w-auto"
                 priority
               />
               <span className="text-[10px] md:text-xs text-[#0E5A61] leading-none font-medium mt-0.5">
