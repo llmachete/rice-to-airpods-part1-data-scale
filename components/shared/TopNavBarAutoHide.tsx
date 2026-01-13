@@ -8,8 +8,13 @@ interface TopNavBarProps {
 }
 
 /**
- * LLMachete Brand-Compliant Top Navigation Bar
+ * LLMachete Brand-Compliant Top Navigation Bar with Auto-Hide
  * Three sections: Brand | Current Scale | Reading Progress
+ *
+ * Auto-hide behavior:
+ * - Hides when scrolling down (after initial scroll past header)
+ * - Shows when scrolling up
+ * - Always visible at top of page
  *
  * Brand Colors (Official Brand Guideline):
  * - Warm Orange (Copper): #D47E45 (primary accent)
@@ -22,7 +27,7 @@ interface TopNavBarProps {
  * - TeX Gyre Adventor Regular (body copy)
  * - Franklin Gothic Book (secondary text)
  */
-export default function TopNavBar({ scrollProgress = 0 }: TopNavBarProps) {
+export default function TopNavBarAutoHide({ scrollProgress = 0 }: TopNavBarProps) {
   const [currentScale, setCurrentScale] = useState<{
     name: string;
     icon: string;
@@ -34,10 +39,39 @@ export default function TopNavBar({ scrollProgress = 0 }: TopNavBarProps) {
   });
 
   const [mounted, setMounted] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
 
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  // Auto-hide logic: show on scroll up, hide on scroll down
+  useEffect(() => {
+    if (!mounted) return;
+
+    const controlNavbar = () => {
+      const currentScrollY = window.scrollY;
+
+      // Always show at very top of page
+      if (currentScrollY < 100) {
+        setIsVisible(true);
+      }
+      // Show when scrolling up
+      else if (currentScrollY < lastScrollY) {
+        setIsVisible(true);
+      }
+      // Hide when scrolling down (but only after scrolling past header)
+      else if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        setIsVisible(false);
+      }
+
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener('scroll', controlNavbar);
+    return () => window.removeEventListener('scroll', controlNavbar);
+  }, [mounted, lastScrollY]);
 
   // Update current scale based on scroll position
   useEffect(() => {
@@ -79,7 +113,10 @@ export default function TopNavBar({ scrollProgress = 0 }: TopNavBarProps) {
   if (!mounted) return null;
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-[#F0E7E0] shadow-sm">
+    <nav
+      className={`fixed left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-[#F0E7E0] shadow-sm transition-transform duration-300 ease-in-out ${
+        isVisible ? 'top-0 translate-y-0' : '-top-20 -translate-y-full'
+      }`}>
       <div className="mx-auto h-16 flex items-stretch">
         {/* Section 1: LLMachete Brand (Left) */}
         <div className="flex items-center px-4 md:px-6 border-r border-[#F0E7E0] min-w-[220px] md:min-w-[280px]">

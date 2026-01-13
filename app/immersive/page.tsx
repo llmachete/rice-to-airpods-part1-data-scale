@@ -1,8 +1,14 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import ScrollySection from '@/components/ScrollySection';
+
+// TopNavBar with auto-hide functionality
+const TopNavBarAutoHide = dynamic(
+  () => import('@/components/shared/TopNavBarAutoHide'),
+  { ssr: false }
+);
 
 // Dynamic import for visualizations (client-side only)
 const Visual1_RiceGrain = dynamic(
@@ -79,6 +85,23 @@ export default function ImmersivePage() {
   const [currentStep, setCurrentStep] = useState(0);
   const [currentVisual, setCurrentVisual] = useState<string | null>(null);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [pageScrollProgress, setPageScrollProgress] = useState(0);
+
+  // Track overall page scroll for TopNavBar
+  useEffect(() => {
+    const handleScroll = () => {
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+      const scrollTop = window.scrollY;
+      const maxScroll = documentHeight - windowHeight;
+      const progress = maxScroll > 0 ? Math.min(scrollTop / maxScroll, 1) : 0;
+      setPageScrollProgress(progress);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Initial calculation
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const handleStepEnter = (response: { index: number; element: HTMLElement }) => {
     setCurrentStep(response.index);
@@ -94,6 +117,9 @@ export default function ImmersivePage() {
 
   return (
     <main className="relative bg-slate-50">
+      {/* Auto-hide TopNavBar */}
+      <TopNavBarAutoHide scrollProgress={pageScrollProgress} />
+
       {/* Header */}
       <header className="min-h-screen flex flex-col justify-center items-center px-4 md:px-6 text-center bg-gradient-to-b from-slate-50 to-white" data-section="intro">
         <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold text-slate-900 mb-4 md:mb-6">
