@@ -34,6 +34,12 @@ export default function HumorousCounter() {
   const [isVisible, setIsVisible] = useState(true);
   const animationFrameRef = useRef<number | undefined>(undefined);
 
+  // Draggable position state
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
+  const [isDraggable, setIsDraggable] = useState(false);
+
   // Weighted random selection
   const selectMeasurement = (): Measurement => {
     const totalWeight = measurements.measurements.reduce((sum, m) => sum + m.weight, 0);
@@ -105,6 +111,67 @@ export default function HumorousCounter() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [isMinimized]);
 
+  // Drag handlers
+  const handleMouseDown = (e: React.MouseEvent) => {
+    if (!isDraggable) return;
+    e.preventDefault();
+    setIsDragging(true);
+    const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
+    setDragOffset({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
+    });
+  };
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    if (!isDraggable) return;
+    setIsDragging(true);
+    const touch = e.touches[0];
+    const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
+    setDragOffset({
+      x: touch.clientX - rect.left,
+      y: touch.clientY - rect.top,
+    });
+  };
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!isDragging) return;
+      setPosition({
+        x: e.clientX - dragOffset.x,
+        y: e.clientY - dragOffset.y,
+      });
+    };
+
+    const handleTouchMove = (e: TouchEvent) => {
+      if (!isDragging) return;
+      e.preventDefault();
+      const touch = e.touches[0];
+      setPosition({
+        x: touch.clientX - dragOffset.x,
+        y: touch.clientY - dragOffset.y,
+      });
+    };
+
+    const handleEnd = () => {
+      setIsDragging(false);
+    };
+
+    if (isDragging) {
+      document.addEventListener('mousemove', handleMouseMove);
+      document.addEventListener('mouseup', handleEnd);
+      document.addEventListener('touchmove', handleTouchMove, { passive: false });
+      document.addEventListener('touchend', handleEnd);
+    }
+
+    return () => {
+      document.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseup', handleEnd);
+      document.removeEventListener('touchmove', handleTouchMove);
+      document.removeEventListener('touchend', handleEnd);
+    };
+  }, [isDragging, dragOffset]);
+
   if (!currentMeasurement) return null;
 
   const riceVolumeM3 = currentBytes * RICE_GRAIN_VOLUME_M3;
@@ -139,17 +206,31 @@ export default function HumorousCounter() {
 
   // Minimized view - compact horizontal bar
   if (isMinimized) {
+    const style = isDraggable
+      ? { left: `${position.x}px`, top: `${position.y}px`, right: 'auto' }
+      : {};
+
     return (
       <div
-        className={`fixed top-4 right-4 md:top-6 md:right-6 z-50 cursor-pointer transition-all hover:scale-105 ${
+        className={`fixed z-50 cursor-pointer transition-all hover:scale-105 ${
           !isVisible ? 'opacity-0 pointer-events-none' : 'opacity-100'
+        } ${isDragging ? 'cursor-grabbing' : isDraggable ? 'cursor-grab' : ''} ${
+          !isDraggable ? 'top-4 right-4 md:top-6 md:right-6' : ''
         }`}
-        onClick={() => {
-          setIsMinimized(false);
-          setIsVisible(true); // Show widget when user explicitly expands it
+        style={style}
+        onClick={(e) => {
+          if (!isDragging) {
+            setIsMinimized(false);
+            setIsVisible(true); // Show widget when user explicitly expands it
+          }
         }}
+        onMouseDown={handleMouseDown}
+        onTouchStart={handleTouchStart}
       >
         <div className="bg-white border-2 border-slate-200 rounded-full shadow-lg px-4 py-2 md:px-5 md:py-3 flex items-center gap-2 md:gap-3 hover:shadow-xl transition-shadow">
+          {isDraggable && (
+            <span className="text-slate-400 cursor-grab" title="Drag to reposition">⠿</span>
+          )}
           <span className="text-lg md:text-xl">🌾</span>
           <div className="flex items-baseline gap-1 md:gap-2">
             <span className="text-base md:text-lg font-bold text-orange-600 font-mono">{displayValue}</span>
@@ -161,15 +242,31 @@ export default function HumorousCounter() {
     );
   }
 
+  const widgetStyle = isDraggable
+    ? { left: `${position.x}px`, top: `${position.y}px`, right: 'auto' }
+    : {};
+
   return (
     <>
       {/* Main Counter Widget */}
-      <div className={`fixed top-4 right-4 md:top-6 md:right-6 w-[calc(100vw-2rem)] md:w-80 max-w-sm bg-white border-2 border-slate-200 rounded-xl shadow-lg p-4 md:p-6 z-50 transition-all hover:shadow-xl ${
-        !isVisible ? 'opacity-0 pointer-events-none' : 'opacity-100'
-      }`}>
+      <div
+        className={`fixed w-[calc(100vw-2rem)] md:w-80 max-w-sm bg-white border-2 border-slate-200 rounded-xl shadow-lg p-4 md:p-6 z-50 transition-all hover:shadow-xl ${
+          !isVisible ? 'opacity-0 pointer-events-none' : 'opacity-100'
+        } ${isDragging ? 'cursor-grabbing shadow-2xl' : ''} ${
+          !isDraggable ? 'top-4 right-4 md:top-6 md:right-6' : ''
+        }`}
+        style={widgetStyle}
+      >
         {/* Header */}
         <div className="flex items-center justify-between mb-3 md:mb-4">
-          <div className="flex items-center gap-2">
+          <div
+            className={`flex items-center gap-2 ${isDraggable ? 'cursor-grab' : ''}`}
+            onMouseDown={isDraggable ? handleMouseDown : undefined}
+            onTouchStart={isDraggable ? handleTouchStart : undefined}
+          >
+            {isDraggable && (
+              <span className="text-slate-400" title="Drag handle">⠿</span>
+            )}
             <h3 className="text-xs md:text-sm font-semibold text-slate-700 uppercase tracking-wide">
               🌾 Global Data Creation
             </h3>
@@ -177,13 +274,31 @@ export default function HumorousCounter() {
               LIVE
             </span>
           </div>
-          <button
-            onClick={() => setIsMinimized(true)}
-            className="text-slate-400 hover:text-slate-600 text-xl leading-none transition-colors"
-            aria-label="Minimize widget"
-          >
-            −
-          </button>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => {
+                setIsDraggable(!isDraggable);
+                if (!isDraggable) {
+                  // Reset to default position when enabling drag
+                  setPosition({ x: 0, y: 0 });
+                }
+              }}
+              className={`text-slate-400 hover:text-slate-600 text-sm leading-none transition-colors ${
+                isDraggable ? 'text-teal-600' : ''
+              }`}
+              aria-label="Toggle drag mode"
+              title={isDraggable ? 'Lock position' : 'Enable drag'}
+            >
+              {isDraggable ? '🔓' : '📌'}
+            </button>
+            <button
+              onClick={() => setIsMinimized(true)}
+              className="text-slate-400 hover:text-slate-600 text-xl leading-none transition-colors"
+              aria-label="Minimize widget"
+            >
+              −
+            </button>
+          </div>
         </div>
 
         {/* Main Display */}
