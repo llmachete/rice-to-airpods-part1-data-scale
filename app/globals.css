@@ -36,12 +36,13 @@
   --font-secondary: 'Franklin Gothic Book', 'Franklin Gothic', 'Arial Narrow', sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
+/* Disable dark mode - maintain brand-compliant light theme */
+/* @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
   }
-}
+} */
 
 body {
   background: var(--background);
