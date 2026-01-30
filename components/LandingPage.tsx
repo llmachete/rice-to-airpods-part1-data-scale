@@ -3,12 +3,17 @@
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import Image from 'next/image';
+import SeriesIntro from './SeriesIntro';
 
 /**
- * Landing page for From Rice to AirPods: Data Scale
+ * Landing page for From Rice to AirPods
  * Brand-compliant design with LLMachete identity
  *
- * User choice: Immersive experience vs. Article with navigation
+ * Structure:
+ * 1. Header with branding and series title
+ * 2. SeriesIntro - Full series introduction
+ * 3. Experience Chooser - Immersive vs. Article
+ * 4. Footer
  */
 export default function LandingPage() {
   const router = useRouter();
@@ -48,28 +53,21 @@ export default function LandingPage() {
           </div>
         </div>
 
-        {/* Title */}
+        {/* Series Title */}
         <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#1A2332] mb-3">
           From Rice to AirPods
         </h1>
-        <p className="text-xl md:text-2xl text-[#0E5A61] font-semibold mb-4">
-          Data Scale
-        </p>
-        <p className="text-base md:text-lg text-[#1A2332]/70 max-w-2xl mx-auto leading-relaxed">
-          Understanding humanity's data transformation from kilobytes to zettabytes
-          through a single grain of rice
+        <p className="text-lg md:text-xl text-[#0E5A61] font-medium">
+          A Five-Part Series on Data, Transformation, and the Skills That Matter
         </p>
       </header>
+
+      {/* Series Introduction */}
+      <SeriesIntro />
 
       {/* Experience Chooser */}
       <main className="flex-1 flex items-center justify-center px-4 pb-20">
         <div className="max-w-5xl w-full">
-          <h2 className="text-2xl md:text-3xl font-bold text-[#1A2332] text-center mb-3">
-            Choose Your Journey
-          </h2>
-          <p className="text-base md:text-lg text-[#1A2332]/70 text-center mb-12 max-w-2xl mx-auto">
-            Two ways to explore the same story. Pick what works for you.
-          </p>
 
           {/* Cards */}
           <div className="grid md:grid-cols-2 gap-6 md:gap-8">
