@@ -37,7 +37,7 @@ export default function LandingPage() {
       <header className="pt-12 md:pt-20 pb-8 md:pb-12 px-4 text-center">
         {/* LLMachete Branding */}
         <div className="flex items-center justify-center space-x-3 mb-8">
-          {/* Actual Logo */}
+          {/* Icon */}
           <div className="w-12 h-12 md:w-14 md:h-14 rounded-lg bg-[#D47E45] flex items-center justify-center shadow-lg">
             <Image
               src="/llmachete-icon-only.svg"
@@ -47,9 +47,16 @@ export default function LandingPage() {
               className="w-8 h-8 md:w-9 md:h-9"
             />
           </div>
-          <div className="text-left">
-            <div className="text-xl md:text-2xl font-bold text-[#1A2332]">LLMachete</div>
-            <div className="text-xs md:text-sm text-[#0E5A61]">Clarity Through Data</div>
+          {/* Wordmark */}
+          <div className="flex flex-col items-start">
+            <Image
+              src="/llmachete-wordmark.svg"
+              alt="LLMachete"
+              width={160}
+              height={40}
+              className="h-6 md:h-8 w-auto"
+            />
+            <div className="text-xs md:text-sm text-[#0E5A61] mt-0.5">Clarity Through Data</div>
           </div>
         </div>
 
