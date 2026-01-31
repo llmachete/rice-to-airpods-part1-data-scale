@@ -85,7 +85,7 @@ export default function SeriesIntro() {
     { key: 'technology', header: 'Technology' },
     { key: 'size2024', header: '2024 Market Size' },
     { key: 'projection2030', header: '2030 Projection' },
-    { key: 'cagr', header: 'CAGR', highlight: true },
+    { key: 'cagr', header: 'CAGR (Annual Growth Rate)', highlight: true },
   ];
 
   const marketData = [
@@ -231,8 +231,11 @@ export default function SeriesIntro() {
         </h2>
         <div className="prose prose-lg max-w-none text-[#1A2332] space-y-4">
           <p>
-            Every industrial revolution had its GPT—that foundational technology enabling
-            cascading transformations across every sector:
+            Every industrial revolution had its GPT—a{' '}
+            <strong className="text-[#0E5A61]">General Purpose Technology</strong> so
+            foundational it transforms not just one sector but an entire economy. Steam
+            engines didn't just improve mining; they enabled factories, railways, and
+            global trade. Each revolution follows this pattern:
           </p>
         </div>
 
@@ -249,7 +252,9 @@ export default function SeriesIntro() {
           </p>
           <p>
             Klaus Schwab popularized the "4th Industrial Revolution" framing in 2016,
-            pointing to IoT, cyber-physical systems, and ubiquitous connectivity.
+            pointing to IoT (<strong className="text-[#0E5A61]">Internet of Things</strong>—sensors
+            and smart devices connected to the internet), cyber-physical systems (machines
+            that integrate computing with physical processes), and ubiquitous connectivity.
             <sup>
               <a href="#ref-2" className="text-[#0E5A61] hover:text-[#D47E45] no-underline">[2]</a>
             </sup>{' '}
@@ -257,7 +262,7 @@ export default function SeriesIntro() {
             transformation.
           </p>
           <p>
-            But hindsight clarifies. Compare the trajectories from "Year 0":
+            But hindsight clarifies which technology defines an era. Compare the trajectories:
           </p>
         </div>
 
@@ -302,7 +307,7 @@ export default function SeriesIntro() {
           className="my-6"
         />
 
-        <p className="text-sm text-[#1A2332]/70 mb-8">
+        <p className="text-sm text-[#1A2332]/70 mb-2">
           Sources: Wearables
           <sup>
             <a href="#ref-8" className="text-[#0E5A61] hover:text-[#D47E45] no-underline">[8]</a>
@@ -312,19 +317,19 @@ export default function SeriesIntro() {
             <a href="#ref-9" className="text-[#0E5A61] hover:text-[#D47E45] no-underline">[9]</a>
           </sup>
         </p>
+        <p className="text-sm text-[#1A2332]/60 mb-8 italic">
+          CAGR (Compound Annual Growth Rate) measures how fast an industry's value grows
+          year-over-year—a standard metric for comparing market trajectories.
+        </p>
 
         <div className="prose prose-lg max-w-none text-[#1A2332] space-y-4">
           <p>
-            The growth differential is 2–3x. Wearables represent solid, steady growth for
-            a maturing technology. Generative AI is experiencing the explosive adoption
-            curve characteristic of a true GPT.
-          </p>
-          <p>
-            IoT extended the 3rd revolution's logic: more computing, more connectivity,
-            more data collection. LLMs represent something different—a technology that
-            doesn't just process information but generates it, reasons about it, and
-            collaborates with humans in ways that create a cleaner break from what came
-            before.
+            The growth differential tells the story. IoT extended the 3rd revolution's
+            logic: more computing, more connectivity, more data collection.{' '}
+            <strong className="text-[#0E5A61]">LLMs</strong>—Large Language Models, the AI
+            systems powering tools like ChatGPT—represent something different. They don't
+            just process information; they generate it, reason about it, and collaborate
+            with humans in ways that create a cleaner break from what came before.
           </p>
           <p className="font-semibold text-[#0E5A61]">
             The 4th Industrial Revolution started when AI stopped being a tool you query
