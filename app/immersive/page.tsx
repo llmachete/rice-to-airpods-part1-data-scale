@@ -624,12 +624,33 @@ export default function ImmersivePage() {
                 the most data—they're the ones who understand what to do with oceans when everyone else
                 is still thinking in cups.
               </p>
-              <div className="mt-8 p-4 bg-blue-50 rounded-lg border-l-4 border-blue-500">
-                <p className="text-sm text-slate-700 italic">
-                  <strong>Coming next:</strong> Part 2 explores the three dimensions of data that matter
-                  more than size (Volume, Velocity, Variety), and Part 3 reveals how specification quality
-                  became the new competitive moat in the AI era.
+              {/* CTA Block */}
+              <div className="cta-block mt-8">
+                <h3>This is Part 1 of a series.</h3>
+                <p className="text-sm">
+                  Part 2 explores how AI is changing what "data literacy" even means—and why the
+                  companies winning aren't the ones with the most data.
                 </p>
+                <div className="mt-4">
+                  <a
+                    href="https://forms.gle/GxhytVcDT9tMCsWG8"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="cta-button text-sm"
+                  >
+                    Get notified →
+                  </a>
+                  <span className="cta-alt">
+                    or follow on{' '}
+                    <a
+                      href="https://www.linkedin.com/in/zachkeshner"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      LinkedIn
+                    </a>
+                  </span>
+                </div>
               </div>
             </div>
           </div>

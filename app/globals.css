@@ -82,3 +82,53 @@ h1, h2, h3, h4, h5, h6 {
 html {
   scroll-behavior: smooth;
 }
+
+/* CTA Block Styles */
+.cta-block {
+  margin-top: 3rem;
+  padding: 2rem;
+  background: var(--sand-beige);
+  border-left: 4px solid var(--copper);
+  border-radius: 0 8px 8px 0;
+}
+
+.cta-block h3 {
+  margin: 0 0 0.5rem 0;
+  color: var(--deep-teal);
+  font-size: 1.5rem;
+}
+
+.cta-block p {
+  color: var(--navy);
+  margin-bottom: 1rem;
+}
+
+.cta-button {
+  display: inline-block;
+  background: var(--copper);
+  color: white !important;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 600;
+  margin-right: 1rem;
+  transition: background 0.2s ease;
+}
+
+.cta-button:hover {
+  background: var(--deep-teal);
+}
+
+.cta-alt {
+  color: var(--navy);
+  font-size: 0.9rem;
+}
+
+.cta-alt a {
+  color: var(--deep-teal);
+  text-decoration: underline;
+}
+
+.cta-alt a:hover {
+  color: var(--copper);
+}
