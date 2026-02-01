@@ -641,14 +641,15 @@ export default function ImmersivePage() {
                     Get notified →
                   </a>
                   <span className="cta-alt">
-                    or follow on{' '}
+                    or follow{' '}
                     <a
-                      href="https://www.linkedin.com/in/zachkeshner"
+                      href="https://www.linkedin.com/company/llmachete/"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      LinkedIn
+                      LLMachete
                     </a>
+                    {' '}on LinkedIn
                   </span>
                 </div>
               </div>
@@ -697,7 +698,17 @@ export default function ImmersivePage() {
       <footer className="min-h-[50vh] flex items-center justify-center bg-slate-900 text-white">
         <div className="text-center px-6">
           <p className="text-xl mb-4">Part of the "From Rice to AirPods" series</p>
-          <p className="text-slate-400">Built with Next.js • Three.js • D3.js • Scrollama</p>
+          <p className="text-slate-400">
+            Written by{' '}
+            <a
+              href="https://www.linkedin.com/in/zachkeshner"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-slate-300 hover:text-white underline"
+            >
+              Zach Keshner
+            </a>
+          </p>
           <p className="text-slate-500 mt-4">LLMachete © 2025</p>
         </div>
       </footer>
