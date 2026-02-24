@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 
 interface TopNavBarProps {
@@ -40,7 +40,7 @@ export default function TopNavBarAutoHide({ scrollProgress = 0 }: TopNavBarProps
 
   const [mounted, setMounted] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
+  const lastScrollYRef = useRef(0);
 
   useEffect(() => {
     setMounted(true);
@@ -53,25 +53,20 @@ export default function TopNavBarAutoHide({ scrollProgress = 0 }: TopNavBarProps
     const controlNavbar = () => {
       const currentScrollY = window.scrollY;
 
-      // Always show at very top of page
       if (currentScrollY < 100) {
         setIsVisible(true);
-      }
-      // Show when scrolling up
-      else if (currentScrollY < lastScrollY) {
+      } else if (currentScrollY < lastScrollYRef.current) {
         setIsVisible(true);
-      }
-      // Hide when scrolling down (but only after scrolling past header)
-      else if (currentScrollY > lastScrollY && currentScrollY > 100) {
+      } else if (currentScrollY > lastScrollYRef.current && currentScrollY > 100) {
         setIsVisible(false);
       }
 
-      setLastScrollY(currentScrollY);
+      lastScrollYRef.current = currentScrollY;
     };
 
-    window.addEventListener('scroll', controlNavbar);
+    window.addEventListener('scroll', controlNavbar, { passive: true });
     return () => window.removeEventListener('scroll', controlNavbar);
-  }, [mounted, lastScrollY]);
+  }, [mounted]);
 
   // Update current scale based on scroll position
   useEffect(() => {
