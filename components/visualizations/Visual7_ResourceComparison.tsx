@@ -23,8 +23,8 @@ export default function Visual7_ResourceComparison() {
           isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
         }`}
       >
-        <div className="bg-slate-100 rounded-lg p-8 h-full">
-          <h3 className="text-2xl font-bold text-slate-900 mb-6 text-center">
+        <div className="bg-[#F0E7E0] rounded-lg p-8 h-full">
+          <h3 className="text-2xl font-bold text-[#1A2332] mb-6 text-center">
             Traditional Resources
           </h3>
 
@@ -66,7 +66,7 @@ export default function Visual7_ResourceComparison() {
 
       {/* Divider */}
       <div className="hidden md:flex items-center">
-        <div className="w-px h-full bg-gradient-to-b from-transparent via-slate-300 to-transparent" />
+        <div className="w-px h-full bg-gradient-to-b from-transparent via-[#197A83] to-transparent" />
       </div>
 
       {/* Data Resources */}
@@ -75,8 +75,8 @@ export default function Visual7_ResourceComparison() {
           isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
         }`}
       >
-        <div className="bg-blue-50 rounded-lg p-8 h-full">
-          <h3 className="text-2xl font-bold text-blue-900 mb-6 text-center">
+        <div className="bg-[#0E5A61]/5 rounded-lg p-8 h-full">
+          <h3 className="text-2xl font-bold text-[#0E5A61] mb-6 text-center">
             Data Resources
           </h3>
 
@@ -107,7 +107,7 @@ export default function Visual7_ResourceComparison() {
             />
           </div>
 
-          <div className="mt-8 space-y-2 text-sm text-blue-600">
+          <div className="mt-8 space-y-2 text-sm text-[#0E5A61]">
             <PropertyRow label="Tangible" value="~" isTraditional={false} />
             <PropertyRow label="Finite" value="✗" isTraditional={false} />
             <PropertyRow label="Rivalrous" value="~" isTraditional={false} />
@@ -143,7 +143,7 @@ function ResourceItem({
       }}
     >
       <span className="text-4xl">{emoji}</span>
-      <span className="text-lg font-semibold text-slate-700">{name}</span>
+      <span className="text-lg font-semibold text-[#1A2332]">{name}</span>
     </div>
   );
 }
@@ -165,10 +165,10 @@ function PropertyRow({
       <span className="font-medium">{label}:</span>
       <span className={`font-bold ${
         value === '✓'
-          ? isTraditional ? 'text-slate-700' : 'text-blue-700'
+          ? isTraditional ? 'text-[#1A2332]' : 'text-[#0E5A61]'
           : value === '✗'
           ? 'text-red-500'
-          : 'text-amber-600'
+          : 'text-[#D47E45]'
       }`}>
         {value}
       </span>
