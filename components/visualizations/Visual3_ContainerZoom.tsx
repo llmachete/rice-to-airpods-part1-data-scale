@@ -1,10 +1,14 @@
 'use client';
 
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useCallback } from 'react';
 
 interface Visual3Props {
   progress?: number; // 0 to 1, driven by scroll
 }
+
+// Design coordinates (all drawing logic uses these)
+const BASE_W = 800;
+const BASE_H = 600;
 
 /**
  * Visual 3: Shipping Container Zoom (Gigabyte)
@@ -12,45 +16,72 @@ interface Visual3Props {
  */
 export default function Visual3_ContainerZoom({ progress = 0 }: Visual3Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const [animationProgress, setAnimationProgress] = useState(0);
 
   useEffect(() => {
     setAnimationProgress(progress);
   }, [progress]);
 
-  // Helper function to draw coffee cup (defined before useEffect to satisfy linter)
-  const drawCoffeeCup = (
-    ctx: CanvasRenderingContext2D,
-    x: number,
-    y: number,
-    size: number,
-    opacity: number = 1
-  ) => {
-    const cupWidth = size;
-    const cupHeight = size * 1.2;
+  // Resize canvas to match container, respecting devicePixelRatio
+  useEffect(() => {
+    const container = containerRef.current;
+    const canvas = canvasRef.current;
+    if (!container || !canvas) return;
 
-    ctx.save();
-    ctx.translate(x, y);
+    const resize = () => {
+      const rect = container.getBoundingClientRect();
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = rect.width * dpr;
+      canvas.height = rect.height * dpr;
+      canvas.style.width = `${rect.width}px`;
+      canvas.style.height = `${rect.height}px`;
+    };
 
-    ctx.beginPath();
-    ctx.moveTo(-cupWidth / 2 + 5, -cupHeight / 2);
-    ctx.lineTo(cupWidth / 2 - 5, -cupHeight / 2);
-    ctx.lineTo(cupWidth / 2, cupHeight / 2);
-    ctx.lineTo(-cupWidth / 2, cupHeight / 2);
-    ctx.closePath();
+    const ro = new ResizeObserver(resize);
+    ro.observe(container);
+    resize(); // initial sizing
 
-    ctx.fillStyle = `rgba(255, 255, 255, ${opacity})`;
-    ctx.fill();
-    ctx.strokeStyle = `rgba(136, 136, 136, ${opacity})`;
-    ctx.lineWidth = 2;
-    ctx.stroke();
+    return () => ro.disconnect();
+  }, []);
 
-    ctx.beginPath();
-    ctx.arc(cupWidth / 2, 0, size / 4, -Math.PI / 2, Math.PI / 2, false);
-    ctx.stroke();
+  // Helper function to draw coffee cup
+  const drawCoffeeCup = useCallback(
+    (
+      ctx: CanvasRenderingContext2D,
+      x: number,
+      y: number,
+      size: number,
+      opacity: number = 1
+    ) => {
+      const cupWidth = size;
+      const cupHeight = size * 1.2;
 
-    ctx.restore();
-  };
+      ctx.save();
+      ctx.translate(x, y);
+
+      ctx.beginPath();
+      ctx.moveTo(-cupWidth / 2 + 5, -cupHeight / 2);
+      ctx.lineTo(cupWidth / 2 - 5, -cupHeight / 2);
+      ctx.lineTo(cupWidth / 2, cupHeight / 2);
+      ctx.lineTo(-cupWidth / 2, cupHeight / 2);
+      ctx.closePath();
+
+      ctx.fillStyle = `rgba(255, 255, 255, ${opacity})`;
+      ctx.fill();
+      // Brand: copper cup stroke
+      ctx.strokeStyle = `rgba(212, 126, 69, ${opacity})`;
+      ctx.lineWidth = 2;
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.arc(cupWidth / 2, 0, size / 4, -Math.PI / 2, Math.PI / 2, false);
+      ctx.stroke();
+
+      ctx.restore();
+    },
+    []
+  );
 
   // Canvas animation
   useEffect(() => {
@@ -60,26 +91,27 @@ export default function Visual3_ContainerZoom({ progress = 0 }: Visual3Props) {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    const width = canvas.width;
-    const height = canvas.height;
-
-    // Animation stages based on progress
-    // Stage 1 (0-0.25): Cup visible, starts shrinking
-    // Stage 2 (0.25-0.5): Cup multiplies into grid
-    // Stage 3 (0.5-0.75): Zoom out, cups form container silhouette
-    // Stage 4 (0.75-1.0): Container outline appears, labels fade in
+    // Scale factor: map design coordinates to actual canvas pixels
+    const sx = canvas.width / BASE_W;
+    const sy = canvas.height / BASE_H;
 
     const draw = () => {
-      ctx.clearRect(0, 0, width, height);
+      ctx.save();
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.scale(sx, sy);
+
+      // All coordinates below are in design space (800x600)
+      const width = BASE_W;
+      const height = BASE_H;
 
       if (animationProgress < 0.25) {
         // Stage 1: Single coffee cup
-        const scale = 1 - animationProgress * 2; // Shrink from 1 to 0.5
+        const scale = 1 - animationProgress * 2;
         drawCoffeeCup(ctx, width / 2, height / 2, 80 * scale);
       } else if (animationProgress < 0.5) {
         // Stage 2: Cups multiply into grid
-        const gridProgress = (animationProgress - 0.25) * 4; // 0 to 1
-        const gridSize = Math.floor(1 + gridProgress * 9); // 1 to 10
+        const gridProgress = (animationProgress - 0.25) * 4;
+        const gridSize = Math.floor(1 + gridProgress * 9);
         const cupSize = 40 / gridSize;
 
         for (let row = 0; row < gridSize; row++) {
@@ -91,11 +123,10 @@ export default function Visual3_ContainerZoom({ progress = 0 }: Visual3Props) {
         }
       } else if (animationProgress < 0.75) {
         // Stage 3: Zoom out, form container shape
-        const zoomProgress = (animationProgress - 0.5) * 4; // 0 to 1
+        const zoomProgress = (animationProgress - 0.5) * 4;
         const containerWidth = 300 + zoomProgress * 100;
         const containerHeight = 200 + zoomProgress * 50;
 
-        // Draw grid of dots that form container silhouette
         const dotsX = 30;
         const dotsY = 20;
         const dotSize = 2;
@@ -105,11 +136,11 @@ export default function Visual3_ContainerZoom({ progress = 0 }: Visual3Props) {
             const x = width / 2 - containerWidth / 2 + (col / dotsX) * containerWidth;
             const y = height / 2 - containerHeight / 2 + (row / dotsY) * containerHeight;
 
-            // Only draw outline (container shape)
             if (row === 0 || row === dotsY - 1 || col === 0 || col === dotsX - 1) {
               ctx.beginPath();
               ctx.arc(x, y, dotSize, 0, Math.PI * 2);
-              ctx.fillStyle = `rgba(100, 100, 100, ${0.3 + zoomProgress * 0.7})`;
+              // Brand: deep teal dot silhouette
+              ctx.fillStyle = `rgba(14, 90, 97, ${0.3 + zoomProgress * 0.7})`;
               ctx.fill();
             }
           }
@@ -120,10 +151,10 @@ export default function Visual3_ContainerZoom({ progress = 0 }: Visual3Props) {
         const containerHeight = 250;
         const containerX = width / 2 - containerWidth / 2;
         const containerY = height / 2 - containerHeight / 2;
-        const labelOpacity = (animationProgress - 0.75) * 4; // 0 to 1
+        const labelOpacity = (animationProgress - 0.75) * 4;
 
-        // Draw container outline (isometric view)
-        ctx.strokeStyle = '#374151';
+        // Brand: copper container outline
+        ctx.strokeStyle = '#D47E45';
         ctx.lineWidth = 3;
 
         // Front face
@@ -147,15 +178,15 @@ export default function Visual3_ContainerZoom({ progress = 0 }: Visual3Props) {
         ctx.closePath();
         ctx.stroke();
 
-        // Fill faces with subtle gradient
+        // Brand: copper→teal fill gradient
         const gradient = ctx.createLinearGradient(containerX, containerY, containerX, containerY + containerHeight);
-        gradient.addColorStop(0, 'rgba(200, 200, 200, 0.3)');
-        gradient.addColorStop(1, 'rgba(150, 150, 150, 0.3)');
+        gradient.addColorStop(0, 'rgba(212, 126, 69, 0.15)');
+        gradient.addColorStop(1, 'rgba(14, 90, 97, 0.15)');
         ctx.fillStyle = gradient;
         ctx.fillRect(containerX, containerY, containerWidth, containerHeight);
 
-        // Corrugated texture lines
-        ctx.strokeStyle = `rgba(100, 100, 100, ${0.2 * labelOpacity})`;
+        // Brand: copper texture lines
+        ctx.strokeStyle = `rgba(212, 126, 69, ${0.2 * labelOpacity})`;
         ctx.lineWidth = 1;
         for (let i = 0; i < 20; i++) {
           const x = containerX + (i / 20) * containerWidth;
@@ -171,7 +202,8 @@ export default function Visual3_ContainerZoom({ progress = 0 }: Visual3Props) {
           const humanY = containerY + containerHeight;
           const humanHeight = 60;
 
-          ctx.strokeStyle = `rgba(59, 130, 246, ${labelOpacity})`;
+          // Brand: deep teal human figure
+          ctx.strokeStyle = `rgba(14, 90, 97, ${labelOpacity})`;
           ctx.lineWidth = 2;
 
           // Head
@@ -201,10 +233,12 @@ export default function Visual3_ContainerZoom({ progress = 0 }: Visual3Props) {
           ctx.stroke();
         }
       }
+
+      ctx.restore();
     };
 
     draw();
-  }, [animationProgress]);
+  }, [animationProgress, drawCoffeeCup]);
 
   // Calculate stage text based on progress
   const getStageText = () => {
@@ -226,34 +260,32 @@ export default function Visual3_ContainerZoom({ progress = 0 }: Visual3Props) {
     <div className="w-full h-full flex flex-col items-center justify-center p-8 bg-gradient-to-b from-white to-slate-50">
       {/* Title */}
       <div className="mb-6 text-center">
-        <h3 className="text-2xl font-bold text-slate-900 mb-2 transition-all duration-300">
+        <h3 className="text-2xl font-bold text-[#1A2332] mb-2 transition-all duration-300">
           {stageText.title}
         </h3>
-        <p className="text-sm text-slate-600 transition-all duration-300">
+        <p className="text-sm text-[#0E5A61] transition-all duration-300">
           {stageText.subtitle}
         </p>
       </div>
 
       {/* Canvas container */}
-      <div className="relative flex-1 w-full max-w-4xl">
+      <div ref={containerRef} className="relative flex-1 w-full max-w-4xl">
         <canvas
           ref={canvasRef}
-          width={800}
-          height={600}
-          className="w-full h-full border border-slate-200 rounded-lg bg-white shadow-lg"
+          className="absolute inset-0 w-full h-full border border-[#F0E7E0] rounded-lg bg-white shadow-lg"
         />
 
         {/* Dimension labels (visible in final stage) */}
         {animationProgress > 0.75 && (
           <div
-            className="absolute top-4 right-4 bg-white/90 backdrop-blur rounded-lg px-4 py-3 border border-slate-300 transition-opacity duration-500"
+            className="absolute top-4 right-4 bg-white/90 backdrop-blur rounded-lg px-4 py-3 border border-[#F0E7E0] transition-opacity duration-500"
             style={{ opacity: (animationProgress - 0.75) * 4 }}
           >
-            <div className="text-xs text-slate-600 mb-1">20-Foot Container</div>
-            <div className="text-sm font-bold text-slate-900">
+            <div className="text-xs text-[#0E5A61] mb-1">20-Foot Container</div>
+            <div className="text-sm font-bold text-[#1A2332]">
               6.1m × 2.4m × 2.6m
             </div>
-            <div className="text-xs text-slate-500 mt-1">
+            <div className="text-xs text-[#0E5A61] mt-1">
               ~33 cubic meters
             </div>
           </div>
@@ -262,13 +294,13 @@ export default function Visual3_ContainerZoom({ progress = 0 }: Visual3Props) {
 
       {/* Progress indicator */}
       <div className="mt-6 w-64">
-        <div className="bg-slate-200 h-2 rounded-full overflow-hidden">
+        <div className="bg-[#F0E7E0] h-2 rounded-full overflow-hidden">
           <div
-            className="bg-blue-500 h-full transition-all duration-100"
+            className="bg-[#D47E45] h-full transition-all duration-100"
             style={{ width: `${animationProgress * 100}%` }}
           />
         </div>
-        <div className="flex justify-between text-xs text-slate-500 mt-2">
+        <div className="flex justify-between text-xs text-[#0E5A61] mt-2">
           <span>1 KB</span>
           <span>{Math.floor(animationProgress * 100)}%</span>
           <span>1 GB</span>
@@ -276,7 +308,7 @@ export default function Visual3_ContainerZoom({ progress = 0 }: Visual3Props) {
       </div>
 
       {/* Info text */}
-      <div className="mt-6 max-w-md text-center text-sm text-slate-600">
+      <div className="mt-6 max-w-md text-center text-sm text-[#1A2332]">
         <p>
           A gigabyte is 1,000 megabytes or 1 million kilobytes. It&apos;s the scale where
           computing became consumer-friendly in the 2000s—movies, music libraries,
