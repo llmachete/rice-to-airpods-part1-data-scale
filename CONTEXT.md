@@ -49,7 +49,29 @@ An interactive scrollytelling experience that makes data scale tangible. Uses th
 - [ ] Part 2 content: what topic next?
 
 ### Technical Debt / Known Issues
-- None significant - project is deployed and stable
+- Tech debt cleanup IN PROGRESS (2026-02-23) — see docs/plans/2026-02-23-tech-debt-cleanup.md
+- Tasks 1-7 COMPLETE, Tasks 8-10 REMAINING (see below)
+
+### Tech Debt Cleanup Session (2026-02-23) — IN PROGRESS
+
+**Plan file:** `docs/plans/2026-02-23-tech-debt-cleanup.md`
+**Execution method:** Subagent-driven development (superpowers:subagent-driven-development)
+
+**Completed (7/10):**
+- ✅ Task 1: Removed GSAP + intersection-observer (~55KB bundle reduction) — commit 882d69e
+- ✅ Task 2: Added CSP + security headers via vercel.json (corrected after code review) — commits 24d4e4d, 9f3a6d7
+- ✅ Task 3: Fixed TopNavBarAutoHide scroll listener (state→ref, passive:true) — commit b941cd7
+- ✅ Task 4: Added passive:true to HumorousCounter scroll listener — commit d749c42
+- ✅ Task 5: Fixed HumorousCounter RAF restart on measurement rotation (currentMeasurementRef) — commit bff1790
+- ✅ Task 6: Fixed selectMeasurement guard clauses + dedup (lastMeasurementIdRef) — commit 64534e8
+- ✅ Task 7: Fixed drag listener memory leak (dragOffsetRef) — commit 7e57bc6
+
+**Remaining (3/10):**
+- ⏳ Task 8: Fix Visual2_CoffeeCupFill.tsx canvas perf — hoist gradient out of RAF loop, stabilize particle pool via fillProgressRef
+- ⏳ Task 9: Add isValidHttpsUrl() to HumorousCounter, validate sourceUrl before rendering as href
+- ⏳ Task 10: Push to main (git push origin main), smoke test stories.llmachete.com
+
+**To resume:** Open new session, say "Resume work on Rice to AirPods", then execute Tasks 8-10 from the plan using superpowers:subagent-driven-development. All 7 completed tasks are committed and ready on main branch (not yet pushed to origin).
 
 ---
 
