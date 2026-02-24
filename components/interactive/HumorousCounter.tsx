@@ -34,6 +34,7 @@ export default function HumorousCounter() {
   const [isVisible, setIsVisible] = useState(true);
   const animationFrameRef = useRef<number | undefined>(undefined);
   const currentMeasurementRef = useRef<Measurement | null>(null);
+  const lastMeasurementIdRef = useRef<string | null>(null);
 
   // Draggable position state
   const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -42,18 +43,33 @@ export default function HumorousCounter() {
   const [isDraggable, setIsDraggable] = useState(false);
 
   // Weighted random selection
-  const selectMeasurement = (): Measurement => {
-    const totalWeight = measurements.measurements.reduce((sum, m) => sum + m.weight, 0);
-    let random = Math.random() * totalWeight;
+  const selectMeasurement = (): Measurement | null => {
+    const items = measurements.measurements;
+    if (!items || items.length === 0) return null;
 
-    for (const measurement of measurements.measurements) {
-      random -= measurement.weight;
-      if (random <= 0) {
-        return measurement as Measurement;
+    const totalWeight = items.reduce((sum, m) => sum + m.weight, 0);
+    if (totalWeight <= 0) return items[0] as Measurement;
+
+    // Avoid repeating the last measurement (try up to 3 times)
+    for (let attempt = 0; attempt < 3; attempt++) {
+      let random = Math.random() * totalWeight;
+      for (const measurement of items) {
+        random -= measurement.weight;
+        if (random <= 0) {
+          if (measurement.id !== lastMeasurementIdRef.current || items.length === 1) {
+            lastMeasurementIdRef.current = measurement.id;
+            return measurement as Measurement;
+          }
+          break; // Same as last — retry
+        }
       }
     }
 
-    return measurements.measurements[0] as Measurement;
+    // Fallback: pick first item that isn't the last one shown
+    const fallback = items.find((m) => m.id !== lastMeasurementIdRef.current);
+    const selected = (fallback ?? items[0]) as Measurement;
+    lastMeasurementIdRef.current = selected.id;
+    return selected;
   };
 
   // Update counter continuously
@@ -91,16 +107,20 @@ export default function HumorousCounter() {
 
   // Rotate measurement periodically
   useEffect(() => {
-    setCurrentMeasurement(selectMeasurement());
+    const initial = selectMeasurement();
+    if (initial) setCurrentMeasurement(initial);
 
     const interval = setInterval(() => {
-      setCurrentMeasurement(selectMeasurement());
-      setShowMath(false);
-      setShowFormalMath(false);
+      const next = selectMeasurement();
+      if (next) {
+        setCurrentMeasurement(next);
+        setShowMath(false);
+        setShowFormalMath(false);
+      }
     }, ROTATION_INTERVAL);
 
     return () => clearInterval(interval);
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Hide widget on scroll when minimized (prevents content overlap)
   useEffect(() => {
