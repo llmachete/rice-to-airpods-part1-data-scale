@@ -14,7 +14,7 @@ interface DataHourglassProps {
   mode?: HourglassMode;
 }
 
-export default function DataHourglass({ mode = 'explorer' }: DataHourglassProps) {
+export default function DataHourglass({ mode: _mode = 'explorer' }: DataHourglassProps) {
   const [topFillLevel, setTopFillLevel] = useState(75); // Data creation volume (high)
   const [bottomFillLevel, setBottomFillLevel] = useState(25); // Processing/consumption (lower)
 
@@ -213,8 +213,8 @@ export default function DataHourglass({ mode = 'explorer' }: DataHourglassProps)
         {/* Insight callout */}
         <div className="mt-12 max-w-2xl mx-auto bg-slate-900 text-white rounded-xl p-8 text-center">
           <p className="text-lg leading-relaxed">
-            <strong className="text-cyan-400">The paradox:</strong> We're drowning in data but starving
-            for insights. The bottleneck isn't storage—it's our ability to process and act on what we collect.
+            <strong className="text-cyan-400">The paradox:</strong> We&apos;re drowning in data but starving
+            for insights. The bottleneck isn&apos;t storage—it&apos;s our ability to process and act on what we collect.
           </p>
         </div>
       </div>

@@ -320,7 +320,7 @@ export default function VerificationTable() {
 
         <div className="mt-3 text-xs text-slate-500">
           <strong>How to use this table:</strong> Click any link to visit the original source.
-          Compare the value to what the source states. Check "Notes" for calculation methodology.
+          Compare the value to what the source states. Check &quot;Notes&quot; for calculation methodology.
           Export to CSV/JSON for offline analysis.
         </div>
       </div>

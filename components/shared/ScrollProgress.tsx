@@ -33,7 +33,7 @@ export default function ScrollProgress() {
         elements.set(section.id, element);
       }
     });
-    setSectionElements(elements);
+    setSectionElements(elements); // eslint-disable-line react-hooks/set-state-in-effect -- DOM query on mount
 
     // Set up intersection observer
     const observer = new IntersectionObserver(

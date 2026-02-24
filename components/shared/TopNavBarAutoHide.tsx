@@ -43,7 +43,7 @@ export default function TopNavBarAutoHide({ scrollProgress = 0 }: TopNavBarProps
   const lastScrollYRef = useRef(0);
 
   useEffect(() => {
-    setMounted(true);
+    setMounted(true); // eslint-disable-line react-hooks/set-state-in-effect -- hydration gate
   }, []);
 
   // Auto-hide logic: show on scroll up, hide on scroll down
@@ -73,7 +73,7 @@ export default function TopNavBarAutoHide({ scrollProgress = 0 }: TopNavBarProps
     if (!mounted) return;
 
     if (scrollProgress < 0.15) {
-      setCurrentScale({
+      setCurrentScale({ // eslint-disable-line react-hooks/set-state-in-effect -- derived from scroll prop
         name: 'Byte',
         icon: '○',
         color: 'text-[#0E5A61]'

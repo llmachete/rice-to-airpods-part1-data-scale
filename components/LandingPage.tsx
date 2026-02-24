@@ -21,8 +21,8 @@ export default function LandingPage() {
 
   const handleExperienceChoice = (choice: 'immersive' | 'article') => {
     // Track analytics
-    if (typeof window !== 'undefined' && (window as any).gtag) {
-      (window as any).gtag('event', 'experience_choice', {
+    if (typeof window !== 'undefined' && (window as Window & { gtag?: (...args: unknown[]) => void }).gtag) {
+      (window as Window & { gtag?: (...args: unknown[]) => void }).gtag!('event', 'experience_choice', {
         'choice_type': choice,
         'page_location': window.location.href
       });

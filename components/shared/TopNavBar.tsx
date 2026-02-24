@@ -36,7 +36,7 @@ export default function TopNavBar({ scrollProgress = 0 }: TopNavBarProps) {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
+    setMounted(true); // eslint-disable-line react-hooks/set-state-in-effect -- hydration gate
   }, []);
 
   // Update current scale based on scroll position
@@ -44,7 +44,7 @@ export default function TopNavBar({ scrollProgress = 0 }: TopNavBarProps) {
     if (!mounted) return;
 
     if (scrollProgress < 0.15) {
-      setCurrentScale({
+      setCurrentScale({ // eslint-disable-line react-hooks/set-state-in-effect -- derived from scroll prop
         name: 'Byte',
         icon: '○',
         color: 'text-[#0E5A61]'

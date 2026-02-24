@@ -316,7 +316,7 @@ export default function NapsterTimeMachine() {
             </div>
             {selectedEra.id === 'napster-1999' && (
               <div className="text-xs text-slate-600 mt-2">
-                💡 Fun fact: In 1999, users would queue downloads overnight and pray Mom didn't pick up the phone.
+                💡 Fun fact: In 1999, users would queue downloads overnight and pray Mom didn&apos;t pick up the phone.
               </div>
             )}
             {selectedEra.id === '5g-2025' && (

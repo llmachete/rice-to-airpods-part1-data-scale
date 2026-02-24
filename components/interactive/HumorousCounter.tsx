@@ -34,7 +34,7 @@ function isValidHttpsUrl(url: string | undefined): url is string {
 }
 
 export default function HumorousCounter() {
-  const [startTime] = useState(Date.now());
+  const startTimeRef = useRef(0);
   const [currentBytes, setCurrentBytes] = useState(0);
   const [currentMeasurement, setCurrentMeasurement] = useState<Measurement | null>(null);
   const [showMath, setShowMath] = useState(false);
@@ -82,10 +82,16 @@ export default function HumorousCounter() {
     return selected;
   };
 
+  // Initialize startTime on mount (avoids impure Date.now() during render)
+  useEffect(() => {
+    startTimeRef.current = Date.now();
+  }, []);
+
   // Update counter continuously
   useEffect(() => {
     const updateCounter = () => {
-      const elapsed = (Date.now() - startTime) / 1000;
+      if (!startTimeRef.current) return;
+      const elapsed = (Date.now() - startTimeRef.current) / 1000;
       const bytes = Math.floor(elapsed * BYTES_PER_SECOND);
       setCurrentBytes(bytes);
 
@@ -108,7 +114,7 @@ export default function HumorousCounter() {
         cancelAnimationFrame(animationFrameRef.current);
       }
     };
-  }, [startTime]); // currentMeasurement removed — read via ref instead
+  }, []); // startTime now in ref; currentMeasurement read via ref
 
   // Keep ref in sync so RAF loop can read current measurement without restart
   useEffect(() => {
@@ -118,7 +124,7 @@ export default function HumorousCounter() {
   // Rotate measurement periodically
   useEffect(() => {
     const initial = selectMeasurement();
-    if (initial) setCurrentMeasurement(initial);
+    if (initial) setCurrentMeasurement(initial); // eslint-disable-line react-hooks/set-state-in-effect -- init on mount
 
     const interval = setInterval(() => {
       const next = selectMeasurement();
@@ -130,7 +136,7 @@ export default function HumorousCounter() {
     }, ROTATION_INTERVAL);
 
     return () => clearInterval(interval);
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []);
 
   // Hide widget on scroll when minimized (prevents content overlap)
   useEffect(() => {
@@ -258,7 +264,7 @@ export default function HumorousCounter() {
           !isDraggable ? 'top-4 right-4 md:top-6 md:right-6' : ''
         }`}
         style={style}
-        onClick={(e) => {
+        onClick={() => {
           if (!isDragging) {
             setIsMinimized(false);
             setIsVisible(true); // Show widget when user explicitly expands it

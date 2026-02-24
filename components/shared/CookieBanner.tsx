@@ -14,14 +14,14 @@ export default function CookieBanner() {
   };
 
   useEffect(() => {
-    setIsLoaded(true);
+    setIsLoaded(true); // eslint-disable-line react-hooks/set-state-in-effect -- hydration gate
     const consent = localStorage.getItem('cookieConsent');
     if (!consent) {
       setShowBanner(true);
     } else if (consent === 'accepted') {
       loadGoogleAnalytics();
     }
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleAccept = () => {
     localStorage.setItem('cookieConsent', 'accepted');
