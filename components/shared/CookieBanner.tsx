@@ -6,6 +6,13 @@ export default function CookieBanner() {
   const [showBanner, setShowBanner] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
 
+  const loadGoogleAnalytics = () => {
+    if (typeof window !== 'undefined') {
+      const w = window as typeof window & { gtag?: (...args: unknown[]) => void };
+      w.gtag?.('consent', 'update', { analytics_storage: 'granted' });
+    }
+  };
+
   useEffect(() => {
     setIsLoaded(true);
     const consent = localStorage.getItem('cookieConsent');
@@ -14,15 +21,7 @@ export default function CookieBanner() {
     } else if (consent === 'accepted') {
       loadGoogleAnalytics();
     }
-  }, []);
-
-  const loadGoogleAnalytics = () => {
-    if (typeof window !== 'undefined' && (window as any).gtag) {
-      (window as any).gtag('consent', 'update', {
-        'analytics_storage': 'granted'
-      });
-    }
-  };
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleAccept = () => {
     localStorage.setItem('cookieConsent', 'accepted');

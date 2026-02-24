@@ -18,6 +18,40 @@ export default function Visual3_ContainerZoom({ progress = 0 }: Visual3Props) {
     setAnimationProgress(progress);
   }, [progress]);
 
+  // Helper function to draw coffee cup (defined before useEffect to satisfy linter)
+  const drawCoffeeCup = (
+    ctx: CanvasRenderingContext2D,
+    x: number,
+    y: number,
+    size: number,
+    opacity: number = 1
+  ) => {
+    const cupWidth = size;
+    const cupHeight = size * 1.2;
+
+    ctx.save();
+    ctx.translate(x, y);
+
+    ctx.beginPath();
+    ctx.moveTo(-cupWidth / 2 + 5, -cupHeight / 2);
+    ctx.lineTo(cupWidth / 2 - 5, -cupHeight / 2);
+    ctx.lineTo(cupWidth / 2, cupHeight / 2);
+    ctx.lineTo(-cupWidth / 2, cupHeight / 2);
+    ctx.closePath();
+
+    ctx.fillStyle = `rgba(255, 255, 255, ${opacity})`;
+    ctx.fill();
+    ctx.strokeStyle = `rgba(136, 136, 136, ${opacity})`;
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.arc(cupWidth / 2, 0, size / 4, -Math.PI / 2, Math.PI / 2, false);
+    ctx.stroke();
+
+    ctx.restore();
+  };
+
   // Canvas animation
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -172,42 +206,6 @@ export default function Visual3_ContainerZoom({ progress = 0 }: Visual3Props) {
     draw();
   }, [animationProgress]);
 
-  // Helper function to draw coffee cup
-  const drawCoffeeCup = (
-    ctx: CanvasRenderingContext2D,
-    x: number,
-    y: number,
-    size: number,
-    opacity: number = 1
-  ) => {
-    const cupWidth = size;
-    const cupHeight = size * 1.2;
-
-    ctx.save();
-    ctx.translate(x, y);
-
-    // Cup body (trapezoid)
-    ctx.beginPath();
-    ctx.moveTo(-cupWidth / 2 + 5, -cupHeight / 2);
-    ctx.lineTo(cupWidth / 2 - 5, -cupHeight / 2);
-    ctx.lineTo(cupWidth / 2, cupHeight / 2);
-    ctx.lineTo(-cupWidth / 2, cupHeight / 2);
-    ctx.closePath();
-
-    ctx.fillStyle = `rgba(255, 255, 255, ${opacity})`;
-    ctx.fill();
-    ctx.strokeStyle = `rgba(136, 136, 136, ${opacity})`;
-    ctx.lineWidth = 2;
-    ctx.stroke();
-
-    // Handle
-    ctx.beginPath();
-    ctx.arc(cupWidth / 2, 0, size / 4, -Math.PI / 2, Math.PI / 2, false);
-    ctx.stroke();
-
-    ctx.restore();
-  };
-
   // Calculate stage text based on progress
   const getStageText = () => {
     if (animationProgress < 0.25) {
@@ -280,7 +278,7 @@ export default function Visual3_ContainerZoom({ progress = 0 }: Visual3Props) {
       {/* Info text */}
       <div className="mt-6 max-w-md text-center text-sm text-slate-600">
         <p>
-          A gigabyte is 1,000 megabytes or 1 million kilobytes. It's the scale where
+          A gigabyte is 1,000 megabytes or 1 million kilobytes. It&apos;s the scale where
           computing became consumer-friendly in the 2000s—movies, music libraries,
           and entire databases fitting in your pocket.
         </p>

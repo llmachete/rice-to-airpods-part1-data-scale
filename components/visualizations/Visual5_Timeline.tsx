@@ -56,7 +56,7 @@ const TIMELINE_DATA: DataPoint[] = [
 export default function Visual5_Timeline() {
   const svgRef = useRef<SVGSVGElement>(null);
   const [isVisible, setIsVisible] = useState(false);
-  const [hoveredPoint, setHoveredPoint] = useState<DataPoint | null>(null);
+  const [hoveredPoint, _setHoveredPoint] = useState<DataPoint | null>(null);
 
   useEffect(() => {
     // Trigger animation when component mounts

@@ -1,4 +1,5 @@
 'use client';
+/* eslint-disable react/no-unescaped-entities */
 
 import { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
@@ -83,7 +84,7 @@ const MajorBreak = dynamic(
 );
 
 export default function ImmersivePage() {
-  const [currentStep, setCurrentStep] = useState(0);
+  const [_currentStep, setCurrentStep] = useState(0);
   const [currentVisual, setCurrentVisual] = useState<string | null>(null);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [pageScrollProgress, setPageScrollProgress] = useState(0);

@@ -6,6 +6,14 @@ type UnitMode = 'grains' | 'volume' | 'containers' | 'real-world';
 type ScopeMode = 'global' | 'device' | 'site' | 'airpods';
 type VisualMode = 'minimal' | 'progress';
 
+// Data creation rates (bytes per second) — module-level constant
+const RATES = {
+  global: 5549792745195693, // 175 ZB/year
+  device: 2000, // 2 KB/s background smartphone activity
+  site: 500000, // 500 KB loaded (one-time)
+  airpods: 563556, // 563 KB/s audio processing
+};
+
 /**
  * Feature 1: Running Grains Counter
  * Sticky counter showing real-time data creation
@@ -14,30 +22,23 @@ export default function RunningCounter() {
   const [bytesCreated, setBytesCreated] = useState(0);
   const [unitMode, setUnitMode] = useState<UnitMode>('grains');
   const [scopeMode, setScopeMode] = useState<ScopeMode>('global');
-  const [visualMode, setVisualMode] = useState<VisualMode>('progress');
+  const visualMode: VisualMode = 'progress';
   const [isExpanded, setIsExpanded] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(false);
-  const startTimeRef = useRef<number>(Date.now());
+  const startTimeRef = useRef<number>(0);
 
-  // Data creation rates (bytes per second)
-  const RATES = {
-    global: 5549792745195693, // 175 ZB/year
-    device: 2000, // 2 KB/s background smartphone activity
-    site: 500000, // 500 KB loaded (one-time)
-    airpods: 563556, // 563 KB/s audio processing
-  };
+  // Set start time on mount (avoids impure Date.now() call during render)
+  useEffect(() => {
+    startTimeRef.current = Date.now();
+  }, []);
 
   // Update counter every 100ms
   useEffect(() => {
     const interval = setInterval(() => {
       const elapsed = (Date.now() - startTimeRef.current) / 1000; // seconds
-      const rate = scopeMode === 'site'
-        ? RATES.site // One-time for site
-        : RATES[scopeMode];
-
       const bytes = scopeMode === 'site'
         ? RATES.site // Site is one-time load
-        : Math.floor(elapsed * rate);
+        : Math.floor(elapsed * RATES[scopeMode]);
 
       setBytesCreated(bytes);
     }, 100);
@@ -237,7 +238,7 @@ export default function RunningCounter() {
 
             <div className="text-xs text-slate-600 italic">
               {scopeMode === 'global' && (
-                <p>In the time you've been here, humanity created more data than existed in 1990.</p>
+                <p>In the time you&apos;ve been here, humanity created more data than existed in 1990.</p>
               )}
               {scopeMode === 'airpods' && (
                 <p>Your AirPods process shipping containers of data per hour.</p>

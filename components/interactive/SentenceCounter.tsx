@@ -143,7 +143,7 @@ export default function SentenceCounter() {
       {/* Additional context */}
       {isVisible && gbCreated > 100000 && (
         <div className="mt-4 text-center text-sm text-slate-600 italic animate-fade-in">
-          That's more data than existed on all hard drives on Earth in 1990.
+          That&apos;s more data than existed on all hard drives on Earth in 1990.
         </div>
       )}
     </div>

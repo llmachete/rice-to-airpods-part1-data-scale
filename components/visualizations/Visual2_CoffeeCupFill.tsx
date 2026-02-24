@@ -110,7 +110,7 @@ export default function Visual2_CoffeeCupFill({ progress = 0 }: Visual2Props) {
         cancelAnimationFrame(animationFrameRef.current);
       }
     };
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps — reads fillProgress via ref
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   // This component will be controlled by scroll progress from parent
   // No auto-animation needed
