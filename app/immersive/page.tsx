@@ -1,7 +1,7 @@
 'use client';
 /* eslint-disable react/no-unescaped-entities */
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import dynamic from 'next/dynamic';
 import ScrollySection from '@/components/ScrollySection';
 import { FootnoteRef } from '@/components/shared/Footnote';
@@ -105,17 +105,17 @@ export default function ImmersivePage() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleStepEnter = (response: { index: number; element: HTMLElement }) => {
+  const handleStepEnter = useCallback((response: { index: number; element: HTMLElement }) => {
     setCurrentStep(response.index);
     const visualId = response.element.getAttribute('data-visual');
     if (visualId) {
       setCurrentVisual(visualId);
     }
-  };
+  }, []);
 
-  const handleStepProgress = (response: { index: number; progress: number }) => {
+  const handleStepProgress = useCallback((response: { index: number; progress: number }) => {
     setScrollProgress(response.progress);
-  };
+  }, []);
 
   return (
     <main className="relative bg-slate-50">
@@ -145,39 +145,27 @@ export default function ImmersivePage() {
       <div className="relative">
         {/* Sticky Visualization Panel */}
         <div className="sticky top-0 h-screen flex items-center justify-center bg-white">
-          <div className="w-full h-full flex items-center justify-center">
-            {currentVisual === 'visual-1' && (
-              <div className="w-full h-full relative">
-                <Visual1_RiceGrain />
-              </div>
-            )}
-            {currentVisual === 'visual-2' && (
-              <div className="w-full h-full relative">
-                <Visual2_CoffeeCupFill progress={scrollProgress} />
-              </div>
-            )}
-            {currentVisual === 'visual-3' && (
-              <div className="w-full h-full relative">
-                <Visual3_ContainerZoom progress={scrollProgress} />
-              </div>
-            )}
-            {currentVisual === 'visual-7' && (
-              <div className="w-full h-full relative">
-                <Visual7_ResourceComparison />
-              </div>
-            )}
-            {currentVisual === 'visual-5' && (
-              <div className="w-full h-full relative">
-                <Visual5_Timeline />
-              </div>
-            )}
-            {currentVisual === 'visual-6' && (
-              <div className="w-full h-full relative">
-                <Visual6_AirPodsCutaway />
-              </div>
-            )}
+          <div className="w-full h-full relative">
+            <div className={`absolute inset-0 transition-opacity duration-500 ${currentVisual === 'visual-1' ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'}`}>
+              <Visual1_RiceGrain />
+            </div>
+            <div className={`absolute inset-0 transition-opacity duration-500 ${currentVisual === 'visual-2' ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'}`}>
+              <Visual2_CoffeeCupFill progress={scrollProgress} />
+            </div>
+            <div className={`absolute inset-0 transition-opacity duration-500 ${currentVisual === 'visual-3' ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'}`}>
+              <Visual3_ContainerZoom progress={scrollProgress} />
+            </div>
+            <div className={`absolute inset-0 transition-opacity duration-500 ${currentVisual === 'visual-7' ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'}`}>
+              <Visual7_ResourceComparison />
+            </div>
+            <div className={`absolute inset-0 transition-opacity duration-500 ${currentVisual === 'visual-5' ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'}`}>
+              <Visual5_Timeline />
+            </div>
+            <div className={`absolute inset-0 transition-opacity duration-500 ${currentVisual === 'visual-6' ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'}`}>
+              <Visual6_AirPodsCutaway />
+            </div>
             {!currentVisual && (
-              <div className="text-center text-slate-400">
+              <div className="absolute inset-0 flex items-center justify-center text-center text-slate-400">
                 <p>Scroll to begin the journey</p>
               </div>
             )}
