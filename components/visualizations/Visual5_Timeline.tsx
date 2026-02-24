@@ -56,7 +56,6 @@ const TIMELINE_DATA: DataPoint[] = [
 export default function Visual5_Timeline() {
   const svgRef = useRef<SVGSVGElement>(null);
   const [isVisible, setIsVisible] = useState(false);
-  const [hoveredPoint, _setHoveredPoint] = useState<DataPoint | null>(null);
 
   useEffect(() => {
     // Trigger animation when component mounts
@@ -118,14 +117,14 @@ export default function Visual5_Timeline() {
       .call(xAxis)
       .selectAll('text')
       .style('font-size', '12px')
-      .style('fill', '#475569');
+      .style('fill', '#1A2332');
 
     g.append('g')
       .attr('class', 'y-axis')
       .call(yAxis)
       .selectAll('text')
       .style('font-size', '12px')
-      .style('fill', '#475569');
+      .style('fill', '#1A2332');
 
     // Add axis labels
     g.append('text')
@@ -134,7 +133,7 @@ export default function Visual5_Timeline() {
       .style('text-anchor', 'middle')
       .style('font-size', '14px')
       .style('font-weight', '600')
-      .style('fill', '#334155')
+      .style('fill', '#1A2332')
       .text('Year');
 
     g.append('text')
@@ -144,7 +143,7 @@ export default function Visual5_Timeline() {
       .style('text-anchor', 'middle')
       .style('font-size', '14px')
       .style('font-weight', '600')
-      .style('fill', '#334155')
+      .style('fill', '#1A2332')
       .text('Data Scale (Bytes)');
 
     // Create line generator
@@ -159,7 +158,7 @@ export default function Visual5_Timeline() {
       .append('path')
       .datum(TIMELINE_DATA)
       .attr('fill', 'none')
-      .attr('stroke', '#0ea5e9')
+      .attr('stroke', '#D47E45')
       .attr('stroke-width', 3)
       .attr('d', line);
 
@@ -186,8 +185,8 @@ export default function Visual5_Timeline() {
     points
       .append('circle')
       .attr('r', 0)
-      .attr('fill', '#0ea5e9')
-      .attr('stroke', '#fff')
+      .attr('fill', '#D47E45')
+      .attr('stroke', '#0E5A61')
       .attr('stroke-width', 2)
       .style('cursor', 'pointer')
       .transition()
@@ -213,10 +212,10 @@ export default function Visual5_Timeline() {
   return (
     <div className="w-full h-full flex flex-col p-8">
       <div className="mb-4 text-center">
-        <h3 className="text-2xl font-bold text-slate-900 mb-2">
+        <h3 className="text-2xl font-bold text-[#1A2332] mb-2">
           Exponential Growth: 1981–2025
         </h3>
-        <p className="text-sm text-slate-600">
+        <p className="text-sm text-[#0E5A61]">
           From kilobytes to zettabytes in 44 years
         </p>
       </div>
@@ -227,17 +226,6 @@ export default function Visual5_Timeline() {
         style={{ minHeight: '400px' }}
       />
 
-      {hoveredPoint && (
-        <div className="mt-4 p-4 bg-blue-50 rounded-lg">
-          <div className="text-sm">
-            <span className="font-semibold">{hoveredPoint.year}</span>:{' '}
-            {hoveredPoint.scaleLabel}
-          </div>
-          <div className="text-xs text-slate-600 mt-1">
-            {hoveredPoint.physical}
-          </div>
-        </div>
-      )}
     </div>
   );
 }
