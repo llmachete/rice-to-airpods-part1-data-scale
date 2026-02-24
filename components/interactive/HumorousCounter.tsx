@@ -23,6 +23,16 @@ const BYTES_PER_SECOND = 200000; // Was 5.5 quadrillion (real global rate)
 const RICE_GRAIN_VOLUME_M3 = 0.00000005; // 50 mm³
 const ROTATION_INTERVAL = 15000; // 15 seconds
 
+function isValidHttpsUrl(url: string | undefined): url is string {
+  if (!url) return false;
+  try {
+    const parsed = new URL(url);
+    return parsed.protocol === 'https:';
+  } catch {
+    return false;
+  }
+}
+
 export default function HumorousCounter() {
   const [startTime] = useState(Date.now());
   const [currentBytes, setCurrentBytes] = useState(0);
@@ -413,7 +423,7 @@ export default function HumorousCounter() {
               <div className="text-slate-600 mb-1">
                 <strong>Source:</strong> {currentMeasurement.source}
               </div>
-              {currentMeasurement.sourceUrl && (
+              {isValidHttpsUrl(currentMeasurement.sourceUrl) && (
                 <a
                   href={currentMeasurement.sourceUrl}
                   target="_blank"
@@ -519,7 +529,7 @@ export default function HumorousCounter() {
               <div className="border-t border-slate-200 pt-4 mt-4">
                 <div className="text-xs text-slate-600 space-y-1">
                   <div><strong>Measurement Source:</strong> {currentMeasurement.source}</div>
-                  {currentMeasurement.sourceUrl && (
+                  {isValidHttpsUrl(currentMeasurement.sourceUrl) && (
                     <div>
                       <a
                         href={currentMeasurement.sourceUrl}
