@@ -36,16 +36,16 @@ export default function Visual6_AirPodsCutaway() {
 
               {/* H2 Chip glow */}
               <radialGradient id="chipGlow">
-                <stop offset="0%" stopColor="#0EA5E9" stopOpacity="0.8" />
-                <stop offset="70%" stopColor="#0EA5E9" stopOpacity="0.3" />
-                <stop offset="100%" stopColor="#0EA5E9" stopOpacity="0" />
+                <stop offset="0%" stopColor="#197A83" stopOpacity="0.8" />
+                <stop offset="70%" stopColor="#197A83" stopOpacity="0.3" />
+                <stop offset="100%" stopColor="#197A83" stopOpacity="0" />
               </radialGradient>
 
               {/* Data stream gradient */}
               <linearGradient id="streamGradient" x1="0%" y1="100%" x2="0%" y2="0%">
-                <stop offset="0%" stopColor="#F5F5DC" stopOpacity="0.2" />
-                <stop offset="50%" stopColor="#F5F5DC" stopOpacity="0.8" />
-                <stop offset="100%" stopColor="#F5F5DC" stopOpacity="0.2" />
+                <stop offset="0%" stopColor="#D47E45" stopOpacity="0.2" />
+                <stop offset="50%" stopColor="#D47E45" stopOpacity="0.8" />
+                <stop offset="100%" stopColor="#D47E45" stopOpacity="0.2" />
               </linearGradient>
             </defs>
 
@@ -93,8 +93,8 @@ export default function Visual6_AirPodsCutaway() {
                 width="40"
                 height="40"
                 rx="4"
-                fill="#0EA5E9"
-                stroke="#0891B2"
+                fill="#197A83"
+                stroke="#0E5A61"
                 strokeWidth="2"
               />
 
@@ -148,7 +148,7 @@ export default function Visual6_AirPodsCutaway() {
                     cx="200"
                     cy="0"
                     r="3"
-                    fill="#F5F5DC"
+                    fill="#D47E45"
                     className={`animate-particle-${i + 1}`}
                   />
                 ))}
@@ -185,15 +185,15 @@ export default function Visual6_AirPodsCutaway() {
           </p>
           <div className="space-y-2 text-xs md:text-sm">
             <div className="flex items-center gap-3 text-slate-400">
-              <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse" />
+              <div className="w-2 h-2 bg-[#D47E45] rounded-full animate-pulse" />
               <span>Real-time audio processing</span>
             </div>
             <div className="flex items-center gap-3 text-slate-400">
-              <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse animation-delay-200" />
+              <div className="w-2 h-2 bg-[#D47E45] rounded-full animate-pulse animation-delay-200" />
               <span>Adaptive noise cancellation</span>
             </div>
             <div className="flex items-center gap-3 text-slate-400">
-              <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse animation-delay-400" />
+              <div className="w-2 h-2 bg-[#D47E45] rounded-full animate-pulse animation-delay-400" />
               <span>Spatial audio with head tracking</span>
             </div>
           </div>
@@ -214,12 +214,12 @@ export default function Visual6_AirPodsCutaway() {
         <div className="bg-slate-800/90 backdrop-blur-md rounded-full px-6 py-3 border border-slate-700/50 shadow-2xl">
           <div className="flex items-center gap-3 text-slate-300 text-xs md:text-sm">
             <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded-full bg-[#F5F5DC]" />
+              <div className="w-3 h-3 rounded-full bg-[#D47E45]" />
               <span>Data streams</span>
             </div>
             <div className="w-px h-4 bg-slate-600" />
             <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded-sm bg-cyan-500" />
+              <div className="w-3 h-3 rounded-sm bg-[#197A83]" />
               <span>H2 chip</span>
             </div>
           </div>
@@ -261,23 +261,23 @@ export default function Visual6_AirPodsCutaway() {
         }
 
         .animate-particle-1 {
-          animation: particle-flow 4s ease-in-out infinite;
+          animation: particle-flow 2.5s ease-in-out infinite;
         }
 
         .animate-particle-2 {
-          animation: particle-flow 4s ease-in-out infinite 0.8s;
+          animation: particle-flow 2.5s ease-in-out infinite 0.5s;
         }
 
         .animate-particle-3 {
-          animation: particle-flow 4s ease-in-out infinite 1.6s;
+          animation: particle-flow 2.5s ease-in-out infinite 1s;
         }
 
         .animate-particle-4 {
-          animation: particle-flow 4s ease-in-out infinite 2.4s;
+          animation: particle-flow 2.5s ease-in-out infinite 1.5s;
         }
 
         .animate-particle-5 {
-          animation: particle-flow 4s ease-in-out infinite 3.2s;
+          animation: particle-flow 2.5s ease-in-out infinite 2s;
         }
 
         .animation-delay-200 {
