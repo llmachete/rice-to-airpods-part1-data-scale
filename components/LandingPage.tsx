@@ -198,7 +198,7 @@ export default function LandingPage() {
                   </li>
                   <li className="flex items-start space-x-2 text-sm text-[#1A2332]/80">
                     <span className="text-[#D47E45] mt-0.5 font-bold">✓</span>
-                    <span>All same visualizations</span>
+                    <span>Interactive elements inline</span>
                   </li>
                   <li className="flex items-start space-x-2 text-sm text-[#1A2332]/80">
                     <span className="text-[#D47E45] mt-0.5 font-bold">✓</span>
@@ -228,7 +228,7 @@ export default function LandingPage() {
           {/* Help Text */}
           <div className="mt-12 text-center">
             <p className="text-sm text-[#1A2332]/70 max-w-xl mx-auto leading-relaxed">
-              Both tell the same story with identical visualizations.
+              Both tell the same story with the same content.
               <strong className="text-[#1A2332]"> Immersive</strong> is cinematic and distraction-free.
               <strong className="text-[#1A2332]"> Guided</strong> adds navigation for easier browsing.
             </p>
