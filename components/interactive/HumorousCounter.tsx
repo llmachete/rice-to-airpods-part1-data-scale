@@ -33,6 +33,7 @@ export default function HumorousCounter() {
   const [isMinimized, setIsMinimized] = useState(true);
   const [isVisible, setIsVisible] = useState(true);
   const animationFrameRef = useRef<number | undefined>(undefined);
+  const currentMeasurementRef = useRef<Measurement | null>(null);
 
   // Draggable position state
   const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -62,10 +63,11 @@ export default function HumorousCounter() {
       const bytes = Math.floor(elapsed * BYTES_PER_SECOND);
       setCurrentBytes(bytes);
 
-      // Calculate fill percentage if we have a measurement
-      if (currentMeasurement) {
+      // Use ref to avoid restarting RAF loop when measurement rotates
+      const measurement = currentMeasurementRef.current;
+      if (measurement) {
         const riceVolumeM3 = bytes * RICE_GRAIN_VOLUME_M3;
-        const ratio = riceVolumeM3 / currentMeasurement.volumeM3;
+        const ratio = riceVolumeM3 / measurement.volumeM3;
         const percentage = Math.min(Math.floor(ratio * 100), 100);
         setFillPercentage(percentage);
       }
@@ -80,7 +82,12 @@ export default function HumorousCounter() {
         cancelAnimationFrame(animationFrameRef.current);
       }
     };
-  }, [startTime, currentMeasurement]);
+  }, [startTime]); // currentMeasurement removed — read via ref instead
+
+  // Keep ref in sync so RAF loop can read current measurement without restart
+  useEffect(() => {
+    currentMeasurementRef.current = currentMeasurement;
+  }, [currentMeasurement]);
 
   // Rotate measurement periodically
   useEffect(() => {
