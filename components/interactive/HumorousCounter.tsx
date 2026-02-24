@@ -161,22 +161,27 @@ export default function HumorousCounter() {
     });
   };
 
+  const dragOffsetRef = useRef(dragOffset);
   useEffect(() => {
+    dragOffsetRef.current = dragOffset;
+  }, [dragOffset]);
+
+  useEffect(() => {
+    if (!isDragging) return;
+
     const handleMouseMove = (e: MouseEvent) => {
-      if (!isDragging) return;
       setPosition({
-        x: e.clientX - dragOffset.x,
-        y: e.clientY - dragOffset.y,
+        x: e.clientX - dragOffsetRef.current.x,
+        y: e.clientY - dragOffsetRef.current.y,
       });
     };
 
     const handleTouchMove = (e: TouchEvent) => {
-      if (!isDragging) return;
       e.preventDefault();
       const touch = e.touches[0];
       setPosition({
-        x: touch.clientX - dragOffset.x,
-        y: touch.clientY - dragOffset.y,
+        x: touch.clientX - dragOffsetRef.current.x,
+        y: touch.clientY - dragOffsetRef.current.y,
       });
     };
 
@@ -184,12 +189,10 @@ export default function HumorousCounter() {
       setIsDragging(false);
     };
 
-    if (isDragging) {
-      document.addEventListener('mousemove', handleMouseMove);
-      document.addEventListener('mouseup', handleEnd);
-      document.addEventListener('touchmove', handleTouchMove, { passive: false });
-      document.addEventListener('touchend', handleEnd);
-    }
+    document.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mouseup', handleEnd);
+    document.addEventListener('touchmove', handleTouchMove, { passive: false });
+    document.addEventListener('touchend', handleEnd);
 
     return () => {
       document.removeEventListener('mousemove', handleMouseMove);
@@ -197,7 +200,7 @@ export default function HumorousCounter() {
       document.removeEventListener('touchmove', handleTouchMove);
       document.removeEventListener('touchend', handleEnd);
     };
-  }, [isDragging, dragOffset]);
+  }, [isDragging]);
 
   if (!currentMeasurement) return null;
 
