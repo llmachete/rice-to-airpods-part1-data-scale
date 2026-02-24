@@ -9,7 +9,7 @@ export default function Visual1_RiceGrain() {
   return (
     <div className="w-full h-full relative bg-gradient-to-b from-slate-50 to-white flex items-center justify-center overflow-hidden">
       {/* Ambient background elements */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(0,0,0,0.02),transparent_50%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(212,126,69,0.02),transparent_50%)]" />
 
       {/* Main rice grain illustration */}
       <div className="relative">
@@ -67,8 +67,9 @@ export default function Visual1_RiceGrain() {
             rx="60"
             ry="180"
             fill="url(#grainGradient)"
-            stroke="#D4CDB8"
+            stroke="#D47E45"
             strokeWidth="2"
+            strokeOpacity={0.4}
           />
 
           {/* Subtle texture lines */}
@@ -111,16 +112,16 @@ export default function Visual1_RiceGrain() {
 
       {/* Callout label */}
       <div className="absolute bottom-12 md:bottom-16 left-1/2 transform -translate-x-1/2">
-        <div className="bg-white/90 backdrop-blur-sm border border-slate-200 rounded-full px-6 py-3 shadow-lg">
+        <div className="bg-white/90 backdrop-blur-sm border border-[#F0E7E0] rounded-full px-6 py-3 shadow-lg">
           <div className="flex items-center gap-3">
             <div className="flex items-baseline gap-2">
-              <span className="text-2xl font-light text-slate-900">1</span>
-              <span className="text-sm text-slate-500">grain</span>
+              <span className="text-2xl font-light text-[#1A2332]">1</span>
+              <span className="text-sm text-[#0E5A61]">grain</span>
             </div>
-            <div className="w-px h-6 bg-slate-300" />
+            <div className="w-px h-6 bg-[#F0E7E0]" />
             <div className="flex items-baseline gap-2">
-              <span className="text-2xl font-light text-slate-900">1</span>
-              <span className="text-sm text-slate-500">byte</span>
+              <span className="text-2xl font-light text-[#1A2332]">1</span>
+              <span className="text-sm text-[#0E5A61]">byte</span>
             </div>
           </div>
         </div>
@@ -128,11 +129,11 @@ export default function Visual1_RiceGrain() {
 
       {/* Technical annotation line (optional) */}
       <div className="absolute top-1/3 right-8 md:right-16 hidden md:block">
-        <div className="flex items-center gap-3 text-slate-500 text-sm">
-          <div className="h-px w-16 bg-slate-300" />
+        <div className="flex items-center gap-3 text-[#0E5A61] text-sm">
+          <div className="h-px w-16 bg-[#F0E7E0]" />
           <div className="text-xs">
-            <div className="font-medium text-slate-700">Grain of rice</div>
-            <div className="text-slate-400">~7mm × 2mm</div>
+            <div className="font-medium text-[#1A2332]">Grain of rice</div>
+            <div className="text-[#197A83]">~7mm × 2mm</div>
           </div>
         </div>
       </div>
