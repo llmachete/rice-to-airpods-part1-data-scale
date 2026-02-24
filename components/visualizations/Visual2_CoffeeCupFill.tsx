@@ -15,10 +15,12 @@ export default function Visual2_CoffeeCupFill({ progress = 0 }: Visual2Props) {
   const [fillProgress, setFillProgress] = useState(0);
   const [grainCount, setGrainCount] = useState(0);
   const animationFrameRef = useRef<number | undefined>(undefined);
+  const fillProgressRef = useRef(fillProgress);
 
   // Update fill progress from scroll
   useEffect(() => {
     setFillProgress(progress);
+    fillProgressRef.current = progress;
   }, [progress]);
 
   // Update grain count based on fill progress
@@ -26,7 +28,7 @@ export default function Visual2_CoffeeCupFill({ progress = 0 }: Visual2Props) {
     setGrainCount(Math.floor(fillProgress * 1000));
   }, [fillProgress]);
 
-  // Canvas animation for rice grains
+  // Canvas animation for rice grains — runs once, reads fillProgress via ref
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -43,52 +45,34 @@ export default function Visual2_CoffeeCupFill({ progress = 0 }: Visual2Props) {
     const cupX = (width - cupWidth) / 2;
     const cupY = height - cupHeight - 60;
 
-    // Rice grain particles
+    // Pre-compute gradient once (not inside animation loop)
+    const gradient = ctx.createLinearGradient(cupX, cupY, cupX, cupY + cupHeight);
+    gradient.addColorStop(0, '#FFFFFF');
+    gradient.addColorStop(1, '#F0F0F0');
+
+    // Stable particle pool — positions updated each frame based on current fill
+    const maxParticles = 200;
     const particles: { x: number; y: number; size: number; opacity: number }[] = [];
-    const maxParticles = 200; // Visual representation (not actual 1000 for performance)
-
-    // Generate particles based on fill progress
-    const particleCount = Math.floor(fillProgress * maxParticles);
-
-    for (let i = 0; i < particleCount; i++) {
-      // Random position within cup boundaries
-      const randomX = cupX + 20 + Math.random() * (cupWidth - 40);
-
-      // Fill from bottom up based on progress
-      const fillHeight = fillProgress * (cupHeight - 40);
-      const randomY = cupY + cupHeight - 20 - Math.random() * fillHeight;
-
-      particles.push({
-        x: randomX,
-        y: randomY,
-        size: 2 + Math.random() * 2,
-        opacity: 0.6 + Math.random() * 0.4,
-      });
+    for (let i = 0; i < maxParticles; i++) {
+      particles.push({ x: 0, y: 0, size: 2 + Math.random() * 2, opacity: 0.6 + Math.random() * 0.4 });
     }
 
-    // Animation loop
     const animate = () => {
+      const currentFill = fillProgressRef.current;
+      const particleCount = Math.floor(currentFill * maxParticles);
+
       ctx.clearRect(0, 0, width, height);
 
-      // Draw coffee cup (SVG-style with gradient)
+      // Draw cup body (trapezoid shape)
       ctx.save();
-
-      // Cup body (trapezoid shape)
       ctx.beginPath();
-      ctx.moveTo(cupX + 20, cupY); // Top left
-      ctx.lineTo(cupX + cupWidth - 20, cupY); // Top right
-      ctx.lineTo(cupX + cupWidth - 10, cupY + cupHeight); // Bottom right
-      ctx.lineTo(cupX + 10, cupY + cupHeight); // Bottom left
+      ctx.moveTo(cupX + 20, cupY);
+      ctx.lineTo(cupX + cupWidth - 20, cupY);
+      ctx.lineTo(cupX + cupWidth - 10, cupY + cupHeight);
+      ctx.lineTo(cupX + 10, cupY + cupHeight);
       ctx.closePath();
-
-      // Cup gradient
-      const gradient = ctx.createLinearGradient(cupX, cupY, cupX, cupY + cupHeight);
-      gradient.addColorStop(0, '#FFFFFF');
-      gradient.addColorStop(1, '#F0F0F0');
-      ctx.fillStyle = gradient;
+      ctx.fillStyle = gradient; // reuse pre-computed gradient
       ctx.fill();
-
-      // Cup outline
       ctx.strokeStyle = '#888888';
       ctx.lineWidth = 3;
       ctx.stroke();
@@ -99,21 +83,22 @@ export default function Visual2_CoffeeCupFill({ progress = 0 }: Visual2Props) {
       ctx.strokeStyle = '#888888';
       ctx.lineWidth = 3;
       ctx.stroke();
-
       ctx.restore();
 
-      // Draw rice grain particles
-      particles.forEach((particle) => {
-        ctx.beginPath();
-        ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(245, 245, 220, ${particle.opacity})`; // Beige rice color
-        ctx.fill();
+      // Update and draw only the active particles
+      const fillHeight = currentFill * (cupHeight - 40);
+      for (let i = 0; i < particleCount; i++) {
+        particles[i].x = cupX + 20 + ((i * 73) % (cupWidth - 40));
+        particles[i].y = cupY + cupHeight - 20 - ((i * 47) % Math.max(fillHeight, 1));
 
-        // Subtle outline for depth
-        ctx.strokeStyle = `rgba(220, 220, 200, ${particle.opacity * 0.5})`;
+        ctx.beginPath();
+        ctx.arc(particles[i].x, particles[i].y, particles[i].size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(245, 245, 220, ${particles[i].opacity})`;
+        ctx.fill();
+        ctx.strokeStyle = `rgba(220, 220, 200, ${particles[i].opacity * 0.5})`;
         ctx.lineWidth = 0.5;
         ctx.stroke();
-      });
+      }
 
       animationFrameRef.current = requestAnimationFrame(animate);
     };
@@ -125,7 +110,7 @@ export default function Visual2_CoffeeCupFill({ progress = 0 }: Visual2Props) {
         cancelAnimationFrame(animationFrameRef.current);
       }
     };
-  }, [fillProgress]);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps — reads fillProgress via ref
 
   // This component will be controlled by scroll progress from parent
   // No auto-animation needed
