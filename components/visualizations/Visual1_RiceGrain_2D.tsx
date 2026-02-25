@@ -9,7 +9,7 @@ export default function Visual1_RiceGrain() {
   return (
     <div className="w-full h-full relative bg-gradient-to-b from-slate-50 to-white flex items-center justify-center overflow-hidden">
       {/* Ambient background elements */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(212,126,69,0.02),transparent_50%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(217,125,66,0.02),transparent_50%)]" />
 
       {/* Main rice grain illustration */}
       <div className="relative">
@@ -67,7 +67,7 @@ export default function Visual1_RiceGrain() {
             rx="60"
             ry="180"
             fill="url(#grainGradient)"
-            stroke="#D47E45"
+            stroke="#D97D42"
             strokeWidth="2"
             strokeOpacity={0.4}
           />

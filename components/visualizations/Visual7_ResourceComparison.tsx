@@ -168,7 +168,7 @@ function PropertyRow({
           ? isTraditional ? 'text-[#1A2332]' : 'text-[#0E5A61]'
           : value === '✗'
           ? 'text-red-500'
-          : 'text-[#D47E45]'
+          : 'text-[#D97D42]'
       }`}>
         {value}
       </span>

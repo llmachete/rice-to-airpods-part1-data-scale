@@ -59,7 +59,7 @@ export default function BrandTable({ columns, data, caption, className = '' }: B
                     key={col.key}
                     className={`
                       px-4 py-3 text-sm
-                      ${col.highlight ? 'text-[#D47E45] font-semibold' : 'text-[#1A2332]'}
+                      ${col.highlight ? 'text-[#D97D42] font-semibold' : 'text-[#1A2332]'}
                       ${col.className || ''}
                     `}
                   >
@@ -96,7 +96,7 @@ export default function BrandTable({ columns, data, caption, className = '' }: B
                   <span
                     className={`
                       text-sm text-right max-w-[60%]
-                      ${col.highlight ? 'text-[#D47E45] font-semibold' : 'text-[#1A2332]'}
+                      ${col.highlight ? 'text-[#D97D42] font-semibold' : 'text-[#1A2332]'}
                     `}
                   >
                     {row[col.key]}

@@ -43,9 +43,9 @@ export default function Visual6_AirPodsCutaway() {
 
               {/* Data stream gradient */}
               <linearGradient id="streamGradient" x1="0%" y1="100%" x2="0%" y2="0%">
-                <stop offset="0%" stopColor="#D47E45" stopOpacity="0.2" />
-                <stop offset="50%" stopColor="#D47E45" stopOpacity="0.8" />
-                <stop offset="100%" stopColor="#D47E45" stopOpacity="0.2" />
+                <stop offset="0%" stopColor="#D97D42" stopOpacity="0.2" />
+                <stop offset="50%" stopColor="#D97D42" stopOpacity="0.8" />
+                <stop offset="100%" stopColor="#D97D42" stopOpacity="0.2" />
               </linearGradient>
             </defs>
 
@@ -148,7 +148,7 @@ export default function Visual6_AirPodsCutaway() {
                     cx="200"
                     cy="0"
                     r="3"
-                    fill="#D47E45"
+                    fill="#D97D42"
                     className={`animate-particle-${i + 1}`}
                   />
                 ))}
@@ -185,15 +185,15 @@ export default function Visual6_AirPodsCutaway() {
           </p>
           <div className="space-y-2 text-xs md:text-sm">
             <div className="flex items-center gap-3 text-slate-400">
-              <div className="w-2 h-2 bg-[#D47E45] rounded-full animate-pulse" />
+              <div className="w-2 h-2 bg-[#D97D42] rounded-full animate-pulse" />
               <span>Real-time audio processing</span>
             </div>
             <div className="flex items-center gap-3 text-slate-400">
-              <div className="w-2 h-2 bg-[#D47E45] rounded-full animate-pulse animation-delay-200" />
+              <div className="w-2 h-2 bg-[#D97D42] rounded-full animate-pulse animation-delay-200" />
               <span>Adaptive noise cancellation</span>
             </div>
             <div className="flex items-center gap-3 text-slate-400">
-              <div className="w-2 h-2 bg-[#D47E45] rounded-full animate-pulse animation-delay-400" />
+              <div className="w-2 h-2 bg-[#D97D42] rounded-full animate-pulse animation-delay-400" />
               <span>Spatial audio with head tracking</span>
             </div>
           </div>
@@ -214,7 +214,7 @@ export default function Visual6_AirPodsCutaway() {
         <div className="bg-slate-800/90 backdrop-blur-md rounded-full px-6 py-3 border border-slate-700/50 shadow-2xl">
           <div className="flex items-center gap-3 text-slate-300 text-xs md:text-sm">
             <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded-full bg-[#D47E45]" />
+              <div className="w-3 h-3 rounded-full bg-[#D97D42]" />
               <span>Data streams</span>
             </div>
             <div className="w-px h-4 bg-slate-600" />

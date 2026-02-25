@@ -158,7 +158,7 @@ export default function Visual5_Timeline() {
       .append('path')
       .datum(TIMELINE_DATA)
       .attr('fill', 'none')
-      .attr('stroke', '#D47E45')
+      .attr('stroke', '#D97D42')
       .attr('stroke-width', 3)
       .attr('d', line);
 
@@ -185,7 +185,7 @@ export default function Visual5_Timeline() {
     points
       .append('circle')
       .attr('r', 0)
-      .attr('fill', '#D47E45')
+      .attr('fill', '#D97D42')
       .attr('stroke', '#0E5A61')
       .attr('stroke-width', 2)
       .style('cursor', 'pointer')

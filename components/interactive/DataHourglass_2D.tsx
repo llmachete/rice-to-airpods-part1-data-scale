@@ -213,7 +213,7 @@ export default function DataHourglass({ mode: _mode = 'explorer' }: DataHourglas
         {/* Insight callout */}
         <div className="mt-12 max-w-2xl mx-auto bg-slate-900 text-white rounded-xl p-8 text-center">
           <p className="text-lg leading-relaxed">
-            <strong className="text-[#D47E45]">The paradox:</strong> We&apos;re drowning in data but starving
+            <strong className="text-[#D97D42]">The paradox:</strong> We&apos;re drowning in data but starving
             for insights. The bottleneck isn&apos;t storage—it&apos;s our ability to process and act on what we collect.
           </p>
         </div>

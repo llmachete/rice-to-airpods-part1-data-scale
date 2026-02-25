@@ -70,7 +70,7 @@ export default function Visual3_ContainerZoom({ progress = 0 }: Visual3Props) {
       ctx.fillStyle = `rgba(255, 255, 255, ${opacity})`;
       ctx.fill();
       // Brand: copper cup stroke
-      ctx.strokeStyle = `rgba(212, 126, 69, ${opacity})`;
+      ctx.strokeStyle = `rgba(217, 125, 66, ${opacity})`;
       ctx.lineWidth = 2;
       ctx.stroke();
 
@@ -154,7 +154,7 @@ export default function Visual3_ContainerZoom({ progress = 0 }: Visual3Props) {
         const labelOpacity = (animationProgress - 0.75) * 4;
 
         // Brand: copper container outline
-        ctx.strokeStyle = '#D47E45';
+        ctx.strokeStyle = '#D97D42';
         ctx.lineWidth = 3;
 
         // Front face
@@ -180,13 +180,13 @@ export default function Visual3_ContainerZoom({ progress = 0 }: Visual3Props) {
 
         // Brand: copper→teal fill gradient
         const gradient = ctx.createLinearGradient(containerX, containerY, containerX, containerY + containerHeight);
-        gradient.addColorStop(0, 'rgba(212, 126, 69, 0.15)');
+        gradient.addColorStop(0, 'rgba(217, 125, 66, 0.15)');
         gradient.addColorStop(1, 'rgba(14, 90, 97, 0.15)');
         ctx.fillStyle = gradient;
         ctx.fillRect(containerX, containerY, containerWidth, containerHeight);
 
         // Brand: copper texture lines
-        ctx.strokeStyle = `rgba(212, 126, 69, ${0.2 * labelOpacity})`;
+        ctx.strokeStyle = `rgba(217, 125, 66, ${0.2 * labelOpacity})`;
         ctx.lineWidth = 1;
         for (let i = 0; i < 20; i++) {
           const x = containerX + (i / 20) * containerWidth;
@@ -296,7 +296,7 @@ export default function Visual3_ContainerZoom({ progress = 0 }: Visual3Props) {
       <div className="mt-6 w-64">
         <div className="bg-[#F0E7E0] h-2 rounded-full overflow-hidden">
           <div
-            className="bg-[#D47E45] h-full transition-all duration-100"
+            className="bg-[#D97D42] h-full transition-all duration-100"
             style={{ width: `${animationProgress * 100}%` }}
           />
         </div>

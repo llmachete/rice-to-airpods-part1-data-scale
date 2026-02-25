@@ -141,7 +141,7 @@ export default function SeriesIntro() {
       </div>
 
       {/* Divider */}
-      <div className="w-24 h-1 bg-gradient-to-r from-[#D47E45] to-[#197A83] mx-auto mb-12 md:mb-16 rounded-full" />
+      <div className="w-24 h-1 bg-gradient-to-r from-[#D97D42] to-[#197A83] mx-auto mb-12 md:mb-16 rounded-full" />
 
       {/* Section: The Lens */}
       <div className="mb-12 md:mb-16">
@@ -177,7 +177,7 @@ export default function SeriesIntro() {
       </div>
 
       {/* Divider */}
-      <div className="w-24 h-1 bg-gradient-to-r from-[#D47E45] to-[#197A83] mx-auto mb-12 md:mb-16 rounded-full" />
+      <div className="w-24 h-1 bg-gradient-to-r from-[#D97D42] to-[#197A83] mx-auto mb-12 md:mb-16 rounded-full" />
 
       {/* Section: The Starting Point */}
       <div className="mb-12 md:mb-16">
@@ -190,13 +190,13 @@ export default function SeriesIntro() {
           </p>
           <p>
             Rice was arguably humanity's first{' '}
-            <strong className="text-[#D47E45]">General Purpose Technology (GPT)</strong>—a
+            <strong className="text-[#D97D42]">General Purpose Technology (GPT)</strong>—a
             technology so foundational that it transforms not just one sector but an entire
             economy. GPTs share three defining characteristics: they improve over time, they
             spawn innovation across multiple industries, and they become essential
             infrastructure that other technologies build upon.
             <sup>
-              <a href="#ref-1" className="text-[#0E5A61] hover:text-[#D47E45] no-underline">[1]</a>
+              <a href="#ref-1" className="text-[#0E5A61] hover:text-[#D97D42] no-underline">[1]</a>
             </sup>
           </p>
           <p>
@@ -223,7 +223,7 @@ export default function SeriesIntro() {
       </div>
 
       {/* Divider */}
-      <div className="w-24 h-1 bg-gradient-to-r from-[#D47E45] to-[#197A83] mx-auto mb-12 md:mb-16 rounded-full" />
+      <div className="w-24 h-1 bg-gradient-to-r from-[#D97D42] to-[#197A83] mx-auto mb-12 md:mb-16 rounded-full" />
 
       {/* Section: The Framework */}
       <div className="mb-12 md:mb-16">
@@ -257,7 +257,7 @@ export default function SeriesIntro() {
             and smart devices connected to the internet), cyber-physical systems (machines
             that integrate computing with physical processes), and ubiquitous connectivity.
             <sup>
-              <a href="#ref-2" className="text-[#0E5A61] hover:text-[#D47E45] no-underline">[2]</a>
+              <a href="#ref-2" className="text-[#0E5A61] hover:text-[#D97D42] no-underline">[2]</a>
             </sup>{' '}
             He wasn't wrong—your Apple Watch and smart thermostat are part of this
             transformation.
@@ -280,21 +280,21 @@ export default function SeriesIntro() {
         <p className="text-sm text-[#1A2332]/70 mb-8">
           Sources: Fitbit data
           <sup>
-            <a href="#ref-3" className="text-[#0E5A61] hover:text-[#D47E45] no-underline">[3]</a>
+            <a href="#ref-3" className="text-[#0E5A61] hover:text-[#D97D42] no-underline">[3]</a>
           </sup>
           <sup>
-            <a href="#ref-5" className="text-[#0E5A61] hover:text-[#D47E45] no-underline">[5]</a>
+            <a href="#ref-5" className="text-[#0E5A61] hover:text-[#D97D42] no-underline">[5]</a>
           </sup>
           ; ChatGPT data
           <sup>
-            <a href="#ref-4" className="text-[#0E5A61] hover:text-[#D47E45] no-underline">[4]</a>
+            <a href="#ref-4" className="text-[#0E5A61] hover:text-[#D97D42] no-underline">[4]</a>
           </sup>
           ; Market data
           <sup>
-            <a href="#ref-6" className="text-[#0E5A61] hover:text-[#D47E45] no-underline">[6]</a>
+            <a href="#ref-6" className="text-[#0E5A61] hover:text-[#D97D42] no-underline">[6]</a>
           </sup>
           <sup>
-            <a href="#ref-7" className="text-[#0E5A61] hover:text-[#D47E45] no-underline">[7]</a>
+            <a href="#ref-7" className="text-[#0E5A61] hover:text-[#D97D42] no-underline">[7]</a>
           </sup>
         </p>
 
@@ -311,11 +311,11 @@ export default function SeriesIntro() {
         <p className="text-sm text-[#1A2332]/70 mb-2">
           Sources: Wearables
           <sup>
-            <a href="#ref-8" className="text-[#0E5A61] hover:text-[#D47E45] no-underline">[8]</a>
+            <a href="#ref-8" className="text-[#0E5A61] hover:text-[#D97D42] no-underline">[8]</a>
           </sup>
           ; Generative AI
           <sup>
-            <a href="#ref-9" className="text-[#0E5A61] hover:text-[#D47E45] no-underline">[9]</a>
+            <a href="#ref-9" className="text-[#0E5A61] hover:text-[#D97D42] no-underline">[9]</a>
           </sup>
         </p>
         <p className="text-sm text-[#1A2332]/60 mb-8 italic">
@@ -340,7 +340,7 @@ export default function SeriesIntro() {
       </div>
 
       {/* Divider */}
-      <div className="w-24 h-1 bg-gradient-to-r from-[#D47E45] to-[#197A83] mx-auto mb-12 md:mb-16 rounded-full" />
+      <div className="w-24 h-1 bg-gradient-to-r from-[#D97D42] to-[#197A83] mx-auto mb-12 md:mb-16 rounded-full" />
 
       {/* Section: The Arc */}
       <div className="mb-12 md:mb-16">
@@ -356,16 +356,16 @@ export default function SeriesIntro() {
         {/* Article Cards */}
         <div className="space-y-4">
           {/* Article 1 */}
-          <div className="bg-white border-l-4 border-[#D47E45] rounded-r-lg p-4 md:p-6 shadow-sm">
+          <div className="bg-white border-l-4 border-[#D97D42] rounded-r-lg p-4 md:p-6 shadow-sm">
             <div className="flex items-start gap-4">
-              <span className="text-2xl md:text-3xl font-bold text-[#D47E45]">1</span>
+              <span className="text-2xl md:text-3xl font-bold text-[#D97D42]">1</span>
               <div>
                 <h4 className="text-lg font-bold text-[#1A2332] mb-1">Data Scale</h4>
                 <p className="text-[#1A2332]/80 text-sm md:text-base">
                   One grain of rice. One byte. Build intuitive data literacy using physical
                   objects, then scale to the zettabytes flowing through your pocket.
                 </p>
-                <span className="inline-block mt-2 text-xs font-semibold text-[#D47E45] bg-[#D47E45]/10 px-2 py-1 rounded">
+                <span className="inline-block mt-2 text-xs font-semibold text-[#D97D42] bg-[#D97D42]/10 px-2 py-1 rounded">
                   START HERE
                 </span>
               </div>
@@ -416,9 +416,9 @@ export default function SeriesIntro() {
           </div>
 
           {/* Article 5 */}
-          <div className="bg-white border-l-4 border-[#D47E45] rounded-r-lg p-4 md:p-6 shadow-sm">
+          <div className="bg-white border-l-4 border-[#D97D42] rounded-r-lg p-4 md:p-6 shadow-sm">
             <div className="flex items-start gap-4">
-              <span className="text-2xl md:text-3xl font-bold text-[#D47E45]">5</span>
+              <span className="text-2xl md:text-3xl font-bold text-[#D97D42]">5</span>
               <div>
                 <h4 className="text-lg font-bold text-[#1A2332] mb-1">The Specification Imperative</h4>
                 <p className="text-[#1A2332]/80 text-sm md:text-base">
@@ -434,7 +434,7 @@ export default function SeriesIntro() {
       </div>
 
       {/* Divider */}
-      <div className="w-24 h-1 bg-gradient-to-r from-[#D47E45] to-[#197A83] mx-auto mb-12 md:mb-16 rounded-full" />
+      <div className="w-24 h-1 bg-gradient-to-r from-[#D97D42] to-[#197A83] mx-auto mb-12 md:mb-16 rounded-full" />
 
       {/* Section: The Approach */}
       <div className="mb-12 md:mb-16">
@@ -471,7 +471,7 @@ export default function SeriesIntro() {
       </div>
 
       {/* Divider */}
-      <div className="w-24 h-1 bg-gradient-to-r from-[#D47E45] to-[#197A83] mx-auto mb-12 md:mb-16 rounded-full" />
+      <div className="w-24 h-1 bg-gradient-to-r from-[#D97D42] to-[#197A83] mx-auto mb-12 md:mb-16 rounded-full" />
 
       {/* Section: Begin */}
       <div className="mb-12 md:mb-16 text-center">
@@ -500,7 +500,7 @@ export default function SeriesIntro() {
               href="https://www.sciencedirect.com/science/article/abs/pii/030440769401598T"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[#0E5A61] hover:text-[#D47E45] underline"
+              className="text-[#0E5A61] hover:text-[#D97D42] underline"
             >
               DOI: 10.1016/0304-4076(94)01598-T
             </a>
@@ -513,7 +513,7 @@ export default function SeriesIntro() {
               href="https://www.weforum.org/agenda/2016/01/the-fourth-industrial-revolution-what-it-means-and-how-to-respond/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[#0E5A61] hover:text-[#D47E45] underline"
+              className="text-[#0E5A61] hover:text-[#D97D42] underline"
             >
               weforum.org
             </a>
@@ -526,7 +526,7 @@ export default function SeriesIntro() {
               href="https://spectrum.ieee.org/fitbit"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[#0E5A61] hover:text-[#D47E45] underline"
+              className="text-[#0E5A61] hover:text-[#D97D42] underline"
             >
               spectrum.ieee.org
             </a>
@@ -539,7 +539,7 @@ export default function SeriesIntro() {
               href="https://seoprofy.com/blog/chatgpt-statistics/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[#0E5A61] hover:text-[#D47E45] underline"
+              className="text-[#0E5A61] hover:text-[#D97D42] underline"
             >
               seoprofy.com
             </a>
@@ -551,7 +551,7 @@ export default function SeriesIntro() {
               href="https://www.statista.com/topics/2595/fitbit/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[#0E5A61] hover:text-[#D47E45] underline"
+              className="text-[#0E5A61] hover:text-[#D97D42] underline"
             >
               statista.com
             </a>
@@ -564,7 +564,7 @@ export default function SeriesIntro() {
               href="https://www.fortunebusinessinsights.com/generative-ai-market-107837"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[#0E5A61] hover:text-[#D47E45] underline"
+              className="text-[#0E5A61] hover:text-[#D97D42] underline"
             >
               fortunebusinessinsights.com
             </a>
@@ -577,7 +577,7 @@ export default function SeriesIntro() {
               href="https://www.demandsage.com/generative-ai-statistics/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[#0E5A61] hover:text-[#D47E45] underline"
+              className="text-[#0E5A61] hover:text-[#D97D42] underline"
             >
               demandsage.com
             </a>
@@ -590,7 +590,7 @@ export default function SeriesIntro() {
               href="https://www.mordorintelligence.com/industry-reports/wearable-technology-market"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[#0E5A61] hover:text-[#D47E45] underline"
+              className="text-[#0E5A61] hover:text-[#D97D42] underline"
             >
               mordorintelligence.com
             </a>
@@ -603,7 +603,7 @@ export default function SeriesIntro() {
               href="https://www.grandviewresearch.com/industry-analysis/generative-ai-market-report"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[#0E5A61] hover:text-[#D47E45] underline"
+              className="text-[#0E5A61] hover:text-[#D97D42] underline"
             >
               grandviewresearch.com
             </a>

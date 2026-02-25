@@ -149,7 +149,7 @@ export default function Visual2_CoffeeCupFill({ progress = 0 }: Visual2Props) {
       ctx.closePath();
       ctx.fillStyle = gradient;
       ctx.fill();
-      ctx.strokeStyle = '#D47E45';
+      ctx.strokeStyle = '#D97D42';
       ctx.lineWidth = 3 * scale;
       ctx.stroke();
 
@@ -163,7 +163,7 @@ export default function Visual2_CoffeeCupFill({ progress = 0 }: Visual2Props) {
         Math.PI / 2,
         false
       );
-      ctx.strokeStyle = '#D47E45';
+      ctx.strokeStyle = '#D97D42';
       ctx.lineWidth = 3 * scale;
       ctx.stroke();
       ctx.restore();
@@ -186,7 +186,7 @@ export default function Visual2_CoffeeCupFill({ progress = 0 }: Visual2Props) {
 
         ctx.beginPath();
         ctx.arc(x, y, size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(212, 126, 69, ${opacity})`;
+        ctx.fillStyle = `rgba(217, 125, 66, ${opacity})`;
         ctx.fill();
         ctx.strokeStyle = `rgba(14, 90, 97, ${opacity * 0.5})`;
         ctx.lineWidth = 0.5 * scale;
@@ -243,7 +243,7 @@ export default function Visual2_CoffeeCupFill({ progress = 0 }: Visual2Props) {
       <div className="mt-6 w-64">
         <div className="bg-[#F0E7E0] h-2 rounded-full overflow-hidden">
           <div
-            className="bg-[#D47E45] h-full transition-all duration-100"
+            className="bg-[#D97D42] h-full transition-all duration-100"
             style={{ width: `${fillProgress * 100}%` }}
           />
         </div>
