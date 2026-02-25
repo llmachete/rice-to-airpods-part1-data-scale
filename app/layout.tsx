@@ -12,6 +12,7 @@ import CookieBanner from '@/components/shared/CookieBanner';
 export const metadata: Metadata = {
   title: "From Rice to AirPods: Data Scale | LLMachete",
   description: "Understanding data scale from kilobytes to zettabytes through a single grain of rice. Explore humanity's transformation from Industrial Revolution to Information Age.",
+  manifest: '/site.webmanifest',
 };
 
 export default function RootLayout({
