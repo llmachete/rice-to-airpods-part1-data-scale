@@ -59,7 +59,7 @@ export default function ArticlePage() {
             From Rice to AirPods
           </h1>
           <p className="text-xl md:text-2xl text-slate-600 mb-4">
-            Part 1: The Scale of Data in 2025
+            Part 1: The Scale of Data in 2026
           </p>
           <p className="text-lg text-slate-500 mb-3">
             Understanding the transformation from kilobytes to zettabytes through a single grain of rice
@@ -94,7 +94,7 @@ export default function ArticlePage() {
           </p>
           <p className="text-lg text-slate-700 leading-relaxed">
             Now here's the question that changes everything: <strong>How many grains of rice do you
-            think humanity creates in data every single day in 2025?</strong>
+            think humanity creates in data every single day in 2026?</strong>
           </p>
         </section>
 
@@ -189,7 +189,7 @@ export default function ArticlePage() {
           <p className="text-lg text-slate-700 leading-relaxed mb-4">
             A high-definition movie streams at 3-5 GB. Your smartphone's operating system—iOS or Android—
             consumes 8-12 GB of storage space. A complete human genome sequence requires about 200 GB when
-            stored in standard formats. This is the scale of everyday personal computing in 2025: most
+            stored in standard formats. This is the scale of everyday personal computing in 2026: most
             smartphones ship with 128-512 GB of storage, holding hundreds of shipping containers worth
             of data in your pocket.<FootnoteRef number={7} />
           </p>
@@ -278,7 +278,7 @@ export default function ArticlePage() {
             You could literally count the grains in 64 coffee cups.<FootnoteRef number={10} />
           </p>
           <p className="text-lg text-slate-700 leading-relaxed mb-4">
-            In 2025, humanity creates <strong>175 zettabytes</strong> of data annually.
+            In 2026, humanity creates <strong>175 zettabytes</strong> of data annually.
             That's 175 followed by 21 zeros. That's <strong>175 lakes worth of rice grains—each
             lake 2 kilometers long, 1 kilometer wide, 25 meters deep—every single year.</strong><FootnoteRef number={11} />
           </p>
@@ -461,7 +461,7 @@ export default function ArticlePage() {
               Zach Keshner
             </a>
           </p>
-          <p className="text-slate-500 mt-4">LLMachete © 2025</p>
+          <p className="text-slate-500 mt-4">LLMachete © 2026</p>
         </div>
       </footer>
 

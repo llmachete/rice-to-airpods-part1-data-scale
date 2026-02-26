@@ -41,7 +41,7 @@ const TIMELINE_DATA: DataPoint[] = [
     annotation: '🌊 Big Data era',
   },
   {
-    year: 2025,
+    year: 2026,
     scale: 175_000_000_000_000_000_000_000, // 175 ZB
     scaleLabel: '175 ZB',
     physical: '175 ocean lakes',
@@ -51,7 +51,7 @@ const TIMELINE_DATA: DataPoint[] = [
 
 /**
  * Visual 5: Exponential Timeline
- * D3.js chart showing data scale growth from 1980-2025
+ * D3.js chart showing data scale growth from 1980-2026
  */
 export default function Visual5_Timeline() {
   const svgRef = useRef<SVGSVGElement>(null);
@@ -79,7 +79,7 @@ export default function Visual5_Timeline() {
     // Create scales
     const xScale = d3
       .scaleLinear()
-      .domain([1980, 2025])
+      .domain([1980, 2026])
       .range([0, innerWidth]);
 
     const yScale = d3
@@ -213,7 +213,7 @@ export default function Visual5_Timeline() {
     <div className="w-full h-full flex flex-col p-8">
       <div className="mb-4 text-center">
         <h3 className="text-2xl font-bold text-[#1A2332] mb-2">
-          Exponential Growth: 1981–2025
+          Exponential Growth: 1981–2026
         </h3>
         <p className="text-sm text-[#0E5A61]">
           From kilobytes to zettabytes in 44 years

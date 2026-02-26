@@ -29,7 +29,7 @@ const verificationData: VerificationEntry[] = [
     notes: '2018-2023 CAGR',
   },
   {
-    claim: 'Global data 2025',
+    claim: 'Global data 2026',
     value: '175 ZB',
     source: 'IDC (projected)',
     link: 'https://www.idc.com/getdoc.jsp?containerId=prUS47560321',

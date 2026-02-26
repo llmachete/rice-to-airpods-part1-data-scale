@@ -21,7 +21,7 @@ interface EraPreset {
 
 const FILE_PRESETS: FilePreset[] = [
   { id: 'song', name: 'Beyoncé - Single Ladies.mp3', sizeMB: 4, icon: '🎵' },
-  { id: 'photo', name: 'vacation_2025.jpg', sizeMB: 8, icon: '📷' },
+  { id: 'photo', name: 'vacation_2026.jpg', sizeMB: 8, icon: '📷' },
   { id: 'album', name: 'Random Access Memories - Daft Punk', sizeMB: 40, icon: '💿' },
   { id: 'movie', name: 'The Matrix (DivX).avi', sizeMB: 700, icon: '🎬' },
   { id: '4k-movie', name: 'The Matrix (4K UHD).mkv', sizeMB: 25000, icon: '🎞️' },
@@ -65,9 +65,9 @@ const ERA_PRESETS: EraPreset[] = [
     description: 'Mobile data fast enough to replace WiFi.',
   },
   {
-    id: '5g-2025',
-    name: '2025 5G',
-    year: '2025',
+    id: '5g-2026',
+    name: '2026 5G',
+    year: '2026',
     speedMBps: 125, // 1 Gbps
     icon: '🛰️',
     color: '#FFEAA7',
@@ -81,7 +81,7 @@ const ERA_PRESETS: EraPreset[] = [
  */
 export default function NapsterTimeMachine() {
   const [selectedFile, setSelectedFile] = useState<FilePreset>(FILE_PRESETS[0]);
-  const [selectedEra, setSelectedEra] = useState<EraPreset>(ERA_PRESETS[4]); // Default to 2025
+  const [selectedEra, setSelectedEra] = useState<EraPreset>(ERA_PRESETS[4]); // Default to 2026
   const [isDownloading, setIsDownloading] = useState(false);
   const [downloadProgress, setDownloadProgress] = useState(0);
   const [showComparison, setShowComparison] = useState(false);
@@ -183,7 +183,7 @@ export default function NapsterTimeMachine() {
           🎵 Download Time Machine
         </h2>
         <p className="text-slate-600">
-          Experience how data velocity transformed from 1999 to 2025
+          Experience how data velocity transformed from 1999 to 2026
         </p>
       </div>
 
@@ -319,7 +319,7 @@ export default function NapsterTimeMachine() {
                 💡 Fun fact: In 1999, users would queue downloads overnight and pray Mom didn&apos;t pick up the phone.
               </div>
             )}
-            {selectedEra.id === '5g-2025' && (
+            {selectedEra.id === '5g-2026' && (
               <div className="text-xs text-slate-600 mt-2">
                 ⚡ This file downloads {Math.round(ERA_PRESETS[0].speedMBps / selectedEra.speedMBps * 17857)}x faster than 1999 Napster!
               </div>

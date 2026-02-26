@@ -239,7 +239,7 @@ export default function LandingPage() {
       {/* Footer */}
       <footer className="py-8 text-center text-[#1A2332]/60 text-sm border-t border-[#F0E7E0]">
         <p className="font-medium">From Rice to AirPods: Data Scale</p>
-        <p className="mt-2">LLMachete © 2025</p>
+        <p className="mt-2">LLMachete © 2026</p>
       </footer>
     </div>
   );
