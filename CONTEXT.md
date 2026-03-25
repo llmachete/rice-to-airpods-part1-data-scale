@@ -38,7 +38,7 @@ An interactive scrollytelling experience that makes data scale tangible. Uses th
 | Performance tuning | completed | Smooth scroll confirmed |
 | Lint cleanup (81→0 errors) | completed | 2026-02-24, all errors resolved |
 | Visual audit & fixes | **COMPLETED** | All 10 tasks done, deployed 2026-02-24 |
-| Brand asset standardization | **READY TO EXECUTE** | Plan at docs/plans/2026-02-24-brand-asset-standardization.md |
+| Brand asset standardization | **COMPLETED** | All 9 tasks done, deployed 2026-02-25 |
 
 ### Recent Decisions
 | Date | Decision | Rationale |
@@ -89,6 +89,32 @@ An interactive scrollytelling experience that makes data scale tangible. Uses th
 - Task 9: Landing page — fixed misleading article mode description
 - Task 10: Final verification + deploy (pushed to origin/main)
 - All 10 atomic commits pushed, Vercel deployed
+
+### Session Log: 2026-02-25 (Brand Asset Standardization — Execution)
+**Focus**: Execute 9-task brand standardization plan across all 3 LLMachete sites
+
+**Accomplished:**
+- Task 1: Color replaced #D47E45 → #D97D42 across 13 files in Rice to AirPods (83 replacements, hex + rgba)
+- Task 2: Color replaced in Splash Page (6 replacements including URL-encoded favicon)
+- Task 3: Generated favicon asset set (favicon.svg, apple-touch-icon 180px, icon-192, icon-512) from designer SVG using sharp
+- Task 4: Deployed favicons to Rice to AirPods, added manifest link to layout.tsx
+- Task 5: Deployed favicons to Splash Page, replaced inline data-URI with file references
+- Task 6: Deployed favicons to Data Hourglass, deleted vite.svg + react.svg placeholders
+- Task 7: Archived 67 test PNGs from Splash Page root to _archive/
+- Task 8: Updated global CLAUDE.md brand color references (6 replacements)
+- Task 9: Fixed 2 additional stale references in Data Hourglass (theme.css + Scene3D.tsx) + browser mockup
+- Final verification: lint+build pass, zero #D47E45 in any source file across all projects
+- Pushed Rice to AirPods to origin/main (Vercel auto-deploy)
+
+**Commits:**
+- `f55d194` - style: standardize brand color #D47E45 → #D97D42 (designer original)
+- `c95e68a` - feat: add complete favicon set and webmanifest to Rice to AirPods
+
+**Key context:**
+- Official warm orange is now #D97D42 everywhere (code, docs, CLAUDE.md)
+- Splash Page and Data Hourglass changes are uncommitted (part of parent LLMachete repo)
+- site.webmanifest deployed to all 3 projects with PWA icons
+- Generation script was temporary and has been deleted
 
 ### Session Log: 2026-02-24 (Brand Asset Standardization — Planning)
 **Focus**: Audit and plan brand consistency across all LLMachete sites
